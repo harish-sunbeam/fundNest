@@ -1,0 +1,81 @@
+Certainly! Here's an updated version of the table structure 
+with added constraints based on my understanding:
+
+Table: Users
+- User_id (Primary key)
+- First_name (Not null)
+- Last_name (Not null)
+- Mobile_no (Unique, Not null)
+- Address (Not null)
+- State (Not null)
+- Pincode (Not null)
+- Pancard_no (Unique, Not null)
+- Email_Id (Unique, Not null)
+- Sign_in_password (Not null)
+- Gender (Not null)
+- Marital_status (Not null)
+- Dob (Not null)
+- Age (Not null)
+- Passport size photo (Not null)
+
+Table: Nominees
+- Nominee_id (Primary key)
+- User_id (Foreign key referencing Users table)
+- Nominee_first_name (Not null)
+- Nominee_last_name (Not null)
+- Nominee_Mobile_no (Unique, Not null)
+- Nominee_Pancard_no (Unique, Not null)
+- Nominee_Email Id (Unique, Not null)
+- Nominee_Dob (Not null)
+
+Table: Banks
+- Bank_id (Primary key)
+- User_id (Foreign key referencing Users table)
+- Bank_name (Not null)
+- Bank_account_no (Unique, Not null)
+- IFSC_code (Not null)
+- Cancelled_cheque (Not null)
+- Bank_Statement (Not null)
+
+Table: Investments
+- Investment_id (Primary key)
+- User_id (Foreign key referencing Users table)
+- Mutual_fund_name (Not null)
+- NAV (Not null)
+- Date_of_Invested (Not null)
+- User_specific_returns (Not null)
+- No_of_units (Not null)
+
+Table: Companies
+- Company_id (Primary key)
+- Company_Name (Not null)
+- Company_email (Unique, Not null)
+- Company_Contact_no (Unique, Not null)
+- Company_Address (Not null)
+- Company_Registration_no (Unique, Not null)
+- Company_State (Not null)
+- Company_Pincode (Not null)
+
+Table: Admin
+- Admin_id (Primary key)
+- User_id (Foreign key referencing Users table)
+- Admin_First_name (Not null)
+- Admin_Last_name (Not null)
+- Admin_Mobile_no (Unique, Not null)
+- Admin_Address (Not null)
+- Admin_State (Not null)
+- Admin_Pincode (Not null)
+- Admin_Pancard_no (Unique, Not null)
+- Admin_Email Id (Unique, Not null)
+- Admin_Dob (Not null)
+
+Table: Mutual_Funds
+- Mutual_fund_Id (Primary key)
+- Mf_Company_id (Foreign key referencing Companies table)
+- Mf_Stock_Id (Unique, Not null)
+- Mf_Stock_Name (Unique, Not null)
+- Mf_Stock_share (Unique, Not null)
+- Mf_Daily_Stock_change (Not null)
+- Mf_Average_change_5_stock (Not null)
+- Mf_Fund_size (Not null)
+

@@ -1,0 +1,62 @@
+.card1 {
+  transition: all 0.3s;
+}
+
+.card1:hover {
+  transform: scale(1.15);
+}
+
+.mfImg {
+  height: 150px;
+  width: 150px;
+}
+
+.cardSize {
+  height: 300px;
+  width: 300px;
+}
+
+.colContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.return {
+  color: rgb(74, 255, 183);
+}
+
+.periodBtn {
+  transition: all 0.3s;
+  margin: 5px;
+  height: 40px;
+  width: 80px;
+  border-radius: 50;
+  background-color: #0052cc;
+  color: white;
+  outline: none;
+}
+
+.periodBtn:hover {
+  border-radius: 50px;
+  background-color: #44eabb;
+  outline: none;
+}
+
+.startbtn {
+  transition: all 0.3s;
+  margin: 5px;
+  height: 40px;
+  /* width: 100px; */
+  border-radius: 50;
+  background-color: #0052cc;
+  color: white;
+  outline: none;
+}
+
+.startbtn:hover {
+  border-radius: 50px;
+  border-radius: 50px;
+  background-color: #44eabb;
+  outline: none;
+}
