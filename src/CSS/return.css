@@ -1,0 +1,21 @@
+.card {
+  margin-bottom: 30px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+
+.btns {
+  transition: all 0.3s;
+  border-radius: 50;
+  background-color: #0052cc;
+  color: white;
+  outline: none;
+}
+
+.btns:hover {
+  border-radius: 50px;
+  background-color: #44eabb;
+  outline: none;
+}

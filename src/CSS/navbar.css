@@ -1,0 +1,47 @@
+.main-div {
+  display: flex;
+}
+.nav-menu {
+  display: flex;
+}
+
+.nav-menu li {
+  padding: 0 1rem;
+}
+.nav-menu li a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-menu li a:focus {
+  color: rgb(248, 37, 0);
+}
+
+.nav-menu a {
+  color: aqua;
+}
+
+.search-btn {
+  width: 200px;
+}
+
+.login-btn {
+  margin-left: 30px;
+  background-color: #0052cc;
+  color: white;
+  outline: none;
+}
+
+.login-btn:hover {
+  background-color: #44eabb;
+  outline: none;
+}
+
+.input-box-shadow:focus {
+  box-shadow: -3px -3px 10px;
+  color: #0052cc;
+}
+
+/* #01f9c6 */
