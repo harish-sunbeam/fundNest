@@ -1,5 +1,7 @@
 package com.app.entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -44,10 +46,10 @@ public class CustomerPersonalDetails {
 	private String custPanNo;
 	
 	@Column(name="cust_gender",length=7,nullable = false)
-	private char custGender;
+	private String custGender;
 	
 	@Column(name="cust_marital_status",length=10,nullable = false)
-	private char custMaritalStatus;
+	private String custMaritalStatus;
 	
 	@Column(name="cust_occupation",length=30,nullable = false)
 	private String custOccupation;
@@ -62,7 +64,7 @@ public class CustomerPersonalDetails {
 	private int custPinCode;
 	
 	@Column(name="cust_DOB",nullable = false)
-	private Date custDOB;
+	private LocalDate custDOB;
 	
 	
 }

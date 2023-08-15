@@ -1,5 +1,6 @@
 package com.app.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,10 +51,10 @@ public class UserPortfolio {
 	private double oneTimeAmmount;
 	
 	@Column(name="sip_date",nullable = false)
-	private Date sipDate;
+	private LocalDate sipDate;
 	
 	@Column(name="one_time_date",nullable = false)
-	private Date oneTimeDate;
+	private LocalDate oneTimeDate;
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.app.entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -59,6 +61,6 @@ public class CustomerNomineeDetails {
 	private int nomPinCode;
 	
 	@Column(name="nom_DOB",nullable = false)
-	private Date nomDOB;
+	private LocalDate nomDOB;
 	
 }

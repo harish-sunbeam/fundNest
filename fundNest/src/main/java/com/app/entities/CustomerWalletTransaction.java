@@ -1,4 +1,5 @@
 package com.app.entities;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -40,16 +41,16 @@ public class CustomerWalletTransaction{
 	private MFDetails mfDetails;
 	
 	@Column(name="order_status",length = 5,nullable = false)
-	private char orderStatus;
+	private String orderStatus;
 	
 	@Column(name="transaction_status",length = 12,nullable = false)
-	private char transactionStatus;
+	private String transactionStatus;
 	
 	@Column(name="order_date",nullable = false)
-	private Date orderDate;
+	private LocalDate orderDate;
 	
 	@Column(name="order_time",nullable = false)
-	private Date orderTime;
+	private LocalDate orderTime;
 	
 	@Column(name="order_ammount",nullable = false)
 	private double orderAmmount;
