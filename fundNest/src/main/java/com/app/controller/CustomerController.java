@@ -89,7 +89,7 @@ public class CustomerController {
 	public ResponseEntity<?> updateCustProfile(@RequestBody CustomerUpdateProfileRequestDTO request) {
 		{
 			
-			System.out.println("Updated profile of user controller " + request);
+			System.out.println("Updated profile of user " + request);
 			return ResponseEntity.status(HttpStatus.CREATED).body(custService.updateCustProfile(request));
 		}
 	}
