@@ -1,13 +1,24 @@
 package com.app.service;
 
-import com.app.dto.AddKYCDetailsRequestDTO;
-import com.app.dto.AddKYCDetailsResponseDTO;
+import com.app.dto.AddNomineeRequestDTO;
+import com.app.dto.AddNomineeResponseDTO;
 import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.AddProfileResponseDTO;
+import com.app.dto.CustomerUpdateProfileRequestDTO;
+import com.app.dto.CustomerUpdateProfileResponseDTO;
+import com.app.dto.LogInRequestDTO;
+import com.app.dto.LogInResponseDTO;
+import com.app.entities.CustomerPersonalDetails;
+import com.app.entities.SignUpDetails;
 
 public interface CustomerService {
 
-	AddProfileResponseDTO addProfile(AddProfileRequestDTO request);
+	AddProfileResponseDTO addCustProfile(AddProfileRequestDTO request);
 	
-	AddKYCDetailsResponseDTO addCustKYCDetails(AddKYCDetailsRequestDTO requestKYC);
+	AddNomineeResponseDTO addCustNominee(AddNomineeRequestDTO request);
+	
+	CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request);
+
+	CustomerUpdateProfileResponseDTO getCustDetails(SignUpDetails request);
+	
 }

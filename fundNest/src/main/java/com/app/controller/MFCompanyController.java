@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.AddMfDetailsRequestDTO;
 import com.app.dto.MFCompanyProfileRequestDTO;
 import com.app.dto.SignUpRequestDTO;
-import com.app.entities.MFDetails;
-import com.app.service.MFDetailsService;
 import com.app.service.MfCompanyService;
 
 
@@ -24,20 +21,12 @@ public class MFCompanyController {
 	
 	@Autowired
 	private MfCompanyService mfCompanyService; 
-
-	@Autowired
-	private MFDetailsService mfDetailsService;
 	
 	// MF COMPANY PROFILE CREATION
+		//MFCompanyProfileRequestDTO mfCompanyProfile=new MFCompanyProfileRequestDTO();
 		@PostMapping("/myprofilecompany")
 		public ResponseEntity<?> mfCompanyProfile(@RequestBody MFCompanyProfileRequestDTO requestDTO) {
 			System.out.println("in add new mfCompany" + requestDTO);
 			return ResponseEntity.status(HttpStatus.CREATED).body(mfCompanyService.mfCompanyProfile(requestDTO));
-		}
-		
-		@PostMapping("/addmfdetails")
-		public ResponseEntity<?> mfdetails(@RequestBody AddMfDetailsRequestDTO requestMfDetails) {
-			System.out.println("in add new Mutual Fund" + requestMfDetails);
-			return ResponseEntity.status(HttpStatus.CREATED).body(mfDetailsService.addMfDetails(requestMfDetails));
 		}
 }

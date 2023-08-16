@@ -40,7 +40,7 @@ public class CustomerWalletTransaction{
 	@JoinColumn(name="mf_id")
 	private MFDetails mfDetails;
 	
-	@Column(name="order_status",length = 5,nullable = false)
+	@Column(name="order_status",length = 20,nullable = false)
 	private String orderStatus;
 	
 	@Column(name="transaction_status",length = 12,nullable = false)
