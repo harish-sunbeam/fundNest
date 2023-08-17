@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -39,6 +40,10 @@ public class CustomerWalletTransaction{
 	@ManyToOne
 	@JoinColumn(name="mf_id")
 	private MFDetails mfDetails;
+	
+	@OneToOne
+	@JoinColumn(name = "cust_portfolio_id")
+	private UserPortfolio userPortfolio;
 	
 	@Column(name="order_status",length = 20,nullable = false)
 	private String orderStatus;

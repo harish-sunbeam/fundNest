@@ -33,7 +33,7 @@ public class MFDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long MFId;
+	private Long mfId;
 	
 	@OneToOne
 	@JoinColumn(name="MF_company_id")

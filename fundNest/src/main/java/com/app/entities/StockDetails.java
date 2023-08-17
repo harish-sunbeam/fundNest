@@ -1,5 +1,6 @@
 package com.app.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +50,7 @@ public class StockDetails {
 	
 	@Column(name="stock_daily_change")
 	private double stockDailyChange;
+	
+	@Column(name="stock_change_Date")
+	private LocalDate stockChangeDate;
 }
