@@ -6,15 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.EditPassDTO;
+import com.app.dto.ForgetPassOtpDTO;
 import com.app.dto.LogInRequestDTO;
 import com.app.dto.LogInResponseDTO;
 import com.app.dto.OTPVerificationDTO;
 import com.app.dto.SignUpRequestDTO;
+import com.app.entities.SignUpDetails;
 import com.app.entities.UserType;
 import com.app.service.UserService;
 
@@ -64,4 +70,38 @@ public class UserController {
 		
         return ResponseEntity.ok(response);
     }
+    
+    //Latest from harish
+    String email=new String();
+    @PostMapping("/getotpforforgotpass")
+	public ResponseEntity<String> getOtpForForgotPass(@RequestBody ForgetPassOtpDTO emailId) {
+       email=emailId.getEmailId();
+		userService.getOtpForForgotPass(emailId.getEmailId());
+        return ResponseEntity.ok("OTP sent for verification.");
+    }
+    boolean isVerified1;
+    @PostMapping("/verify-otpforforgot")
+    public ResponseEntity<?> verifyOTPForForgotPass(@RequestBody OTPVerificationDTO otpVerificationDTO) {
+        boolean isVerified = userService.verifyOTP(otpVerificationDTO);
+        isVerified1=isVerified;
+        if (isVerified) {
+        	
+            return ResponseEntity.ok("OTP Verification is Successful");
+        } else {
+            return ResponseEntity.badRequest().body("OTP verification failed.");
+        }
+    }
+    
+    @PostMapping("/storenewpass")
+    public ResponseEntity<?> storeNewPass(@RequestBody EditPassDTO pass) {
+       
+        if (isVerified1) {
+        	userService.storeUserDataWithNewPass(pass);
+            return ResponseEntity.ok("Pass changed Successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Pass failed.");
+        }
+    }
+	
+    
 }

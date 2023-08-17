@@ -13,9 +13,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dao.UserDao;
+import com.app.dto.EditPassDTO;
+import com.app.dto.ForgetPassOtpDTO;
 import com.app.dto.LogInRequestDTO;
 import com.app.dto.LogInResponseDTO;
 import com.app.dto.OTPVerificationDTO;
@@ -50,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	public boolean verifyOTP(OTPVerificationDTO otpVerificationDTO) {
 		String storedOTP = otpMap.get(userObj.getEmailId());
+		otpMap=null;
 		return storedOTP != null && storedOTP.equals(otpVerificationDTO.getOtp());
 	}
 
@@ -106,4 +110,34 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(()-> new ResourceNotFoundException("Invalid Id from userServiceImpl"));
 		return cust;
 	}
+	
+
+	//latest form Harish
+	SignUpDetails cust =new SignUpDetails();
+	@Override
+	public void getOtpForForgotPass(String emailId) {
+		 cust=userDao.findByEmailId(emailId);
+		 userObj.setEmailId(emailId);
+		if(cust.getEmailId()!=null)
+		{
+			String otp = generateOTP();
+			sendOTPEmail(emailId, otp);
+			otpMap.put(emailId, otp);
+		}
+		else if(cust.getEmailId()==null)
+			throw new ResourceNotFoundException("User Does not exist from userServiceImpl Class");	
+		
+	}
+	
+	@Override
+	public SignUpResponseDTO storeUserDataWithNewPass(EditPassDTO newPass) {
+		
+		cust.setPassword(newPass.getPassword());
+		SignUpDetails persistentUser = userDao.save(cust);
+
+		return mapper.map(persistentUser, SignUpResponseDTO.class);
+				
+	}
+	
+
 }
