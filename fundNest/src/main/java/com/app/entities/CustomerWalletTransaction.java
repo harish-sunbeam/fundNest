@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -60,6 +61,10 @@ public class CustomerWalletTransaction{
 	
 	@Column(name="opening_balance",nullable = false)
 	private double openingBalance;
+	
+	@Column(name="order_no",nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long orderNo;
 	
 	@Column(name="total_invested_ammount",nullable = false)
 	private double totalInvestedAmmount;
