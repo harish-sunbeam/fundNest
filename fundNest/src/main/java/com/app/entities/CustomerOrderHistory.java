@@ -1,5 +1,6 @@
 package com.app.entities;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -56,12 +57,8 @@ public class CustomerOrderHistory{
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 	
-	
-	@Column(name="order_date",nullable = false)
-	private LocalDate orderDate;
-	
-	@Column(name="order_time",nullable = false)
-	private LocalTime orderTime;
+	@Column(name="order_time",nullable =false)
+	private LocalDateTime orderTime;
 	
 	@Column(name="order_ammount",nullable = false)
 	private double orderAmmount;

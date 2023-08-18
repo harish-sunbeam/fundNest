@@ -1,6 +1,7 @@
 package com.app.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +50,8 @@ public class CustomerTransacHistory {
 	@Column(name="transaction_ammount",nullable = false)
 	private double transactionAmmount;
 	
-	@Column(name="transaction_date",nullable = false)
-	private LocalDate transactionDate;
-	
-	@Column(name="transaction_time",nullable = false)
-	private LocalTime transactionTime;
+	@Column(name="transaction_time",nullable =false)
+	private LocalDateTime transactionTime;
 	
 	@Column(name="opening_balance",nullable = false)
 	private double openingBalance;
