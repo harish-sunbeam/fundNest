@@ -20,4 +20,25 @@ public class AddNomineeResponseDTO {
 	private String nomFirstName;
 
 	private String nomLastName;
+	
+
+	private String nomRelation;
+
+
+	private String nomEmailId;
+	
+	
+	private String nomMobileNo;
+	
+	
+	private String nomAddress;
+	
+	
+	private String nomState;
+	
+	
+	private int nomPinCode;
+	
+	
+	private LocalDate nomDOB;
 }
