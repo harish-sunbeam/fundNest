@@ -1,7 +1,10 @@
 package com.app.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
+
+import javax.persistence.Column;
+
+import com.app.entities.SignUpDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,17 +17,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AddProfileRequestDTO {
-
-	
+public class CustomerUpdateProfileRequestDTO {
 
 	private String custFirstName;
 
 	private String custLastName;
-
-	private String custPanNo;
-
-	private String custGender;
 
 	private String custMaritalStatus;
 
@@ -36,5 +33,4 @@ public class AddProfileRequestDTO {
 
 	private int custPinCode;
 
-	private LocalDate custDOB;
 }
