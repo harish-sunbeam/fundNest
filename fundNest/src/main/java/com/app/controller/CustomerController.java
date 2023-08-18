@@ -115,15 +115,7 @@ public class CustomerController {
 		}
 	}
 	
-//	@GetMapping("/transactionhistory/{custId}")
-//	public ResponseEntity<?> getCustTransacHistory(@PathVariable Long custId)
-//	{
-//		System.out.println("In get Cust Details"+ custId);
-//		SignUpDetails cust=userService.getCustFromId(custId);
-//		
-//		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustDetails(cust));
-//		
-//	}
+
 	
 	@GetMapping("/transactionhistory/{custId}")
 	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
