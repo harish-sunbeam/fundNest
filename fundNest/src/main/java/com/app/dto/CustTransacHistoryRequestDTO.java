@@ -1,7 +1,10 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import javax.persistence.Column;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,9 +23,7 @@ public class CustTransacHistoryRequestDTO {
 
 	private double transactionAmmount;
 
-	private LocalDate transactionDate;
-
-	private LocalTime transactionTime;
+	private LocalDateTime transactionTime;
 
 	private double openingBalance;
 
