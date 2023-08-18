@@ -1,6 +1,7 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.app.entities.OrderStatus;
@@ -20,9 +21,7 @@ public class CustomerOrderHistoryResponseDTO {
 	
 	private OrderStatus orderStatus;
 
-	private LocalDate orderDate;
-
-	private LocalTime orderTime;
+	private LocalDateTime orderTime;
 
 	private double orderAmmount;
 }
