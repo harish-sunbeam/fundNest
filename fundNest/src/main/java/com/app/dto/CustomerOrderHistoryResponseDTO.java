@@ -1,6 +1,9 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
+import com.app.entities.OrderStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +16,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CustomerWalletTransactionResponseDTO {
+public class CustomerOrderHistoryResponseDTO {
 	
-	private String orderStatus;
+	private OrderStatus orderStatus;
+
+	private LocalDate orderDate;
+
+	private LocalTime orderTime;
+
+	private double orderAmmount;
 }

@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
-import com.app.dto.CustomerWalletTransactionRequestDTO;
+import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.UserPortfolioRequestDTO;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.SignUpDetails;
+import com.app.service.CustOrderHistoryService;
 import com.app.service.CustomerService;
 
 import com.app.service.UserPortfolioService;
@@ -39,6 +40,8 @@ public class CustomerController {
 	@Autowired
 	private UserPortfolioService userPortfolioService;
 	
+	@Autowired
+	private CustOrderHistoryService custOrderHistoryService;
 	
 
 	@PostMapping("/addprofile")
@@ -87,6 +90,13 @@ public class CustomerController {
 		}
 	}
 	
+	@PostMapping("/order")
+	public ResponseEntity<?> addOrderHistory(@RequestBody CustomerOrderHistoryRequestDTO request) {
+		{
+			System.out.println("Add order History of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(custOrderHistoryService.addOrderHistory(request));
+		}
+	}
 	
 	
 }
