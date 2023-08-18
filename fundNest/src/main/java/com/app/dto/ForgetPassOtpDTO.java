@@ -11,8 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+public class ForgetPassOtpDTO {
 
-public class AddKYCDetailsResponseDTO {
-
-	private Long custKYCId;
+	private String emailId;
 }

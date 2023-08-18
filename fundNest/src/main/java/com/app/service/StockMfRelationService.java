@@ -2,10 +2,9 @@ package com.app.service;
 
 import java.util.List;
 
-import com.app.entities.MFDetails;
-import com.app.entities.StockMutualFundRelation;
+import com.app.entities.StockDetails;
 
+public interface StockMfRelationService {
 
-public interface StockMfRelationService  {
-	public List<StockMutualFundRelation> getStocksByMutualFund(MFDetails mfDetails);
+	List<StockDetails> getStockDetailsByMfId(Long mfId);
 }

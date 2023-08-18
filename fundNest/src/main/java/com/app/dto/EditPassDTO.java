@@ -1,5 +1,8 @@
 package com.app.dto;
 
+
+import com.app.entities.UserType;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AddKYCDetailsRequestDTO {
-
-	private String bankName;
-
-	private long accNo;
+public class EditPassDTO {
 	
-	private String ifscCode;
-	
-	private double annualIncome;
+	private String password;
 }

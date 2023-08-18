@@ -1,5 +1,6 @@
 package com.app.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +33,10 @@ public class StockDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long stockId;
 	
-//	@ManyToMany
-//	@JoinTable(name="mf_details_stock_details",joinColumns = @JoinColumn(name="mf_id")
-//	,inverseJoinColumns = @JoinColumn(name="stock_id"))
-//	private List<MFDetails> mfDetails=new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name="mf_details_stock_details",joinColumns = @JoinColumn(name="mf_id")
+	,inverseJoinColumns = @JoinColumn(name="stock_id"))
+	private List<MFDetails> mfDetails=new ArrayList<>();
 	
 	
 	@Column(name="stock_name",length = 50,nullable = false,unique = true)
@@ -49,4 +50,7 @@ public class StockDetails {
 	
 	@Column(name="stock_daily_change")
 	private double stockDailyChange;
+	
+	@Column(name="stock_change_Date")
+	private LocalDate stockChangeDate;
 }

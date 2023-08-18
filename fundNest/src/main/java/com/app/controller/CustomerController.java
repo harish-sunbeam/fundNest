@@ -21,7 +21,7 @@ import com.app.dto.UserPortfolioRequestDTO;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.SignUpDetails;
 import com.app.service.CustomerService;
-import com.app.service.CustomerWalletTransactionService;
+
 import com.app.service.UserPortfolioService;
 import com.app.service.UserService;
 
@@ -39,8 +39,7 @@ public class CustomerController {
 	@Autowired
 	private UserPortfolioService userPortfolioService;
 	
-	@Autowired
-	private CustomerWalletTransactionService custWalletTransacService;
+	
 
 	@PostMapping("/addprofile")
 	public ResponseEntity<?> addCustProfile(@RequestBody AddProfileRequestDTO request) {
@@ -66,13 +65,7 @@ public class CustomerController {
 		}
 	}
 	
-	@PostMapping("/wallettransaction")
-	public ResponseEntity<?> addTransation(@RequestBody CustomerWalletTransactionRequestDTO request) {
-		{
-			System.out.println("Add transaction of user " + request);
-			return ResponseEntity.status(HttpStatus.CREATED).body(custWalletTransacService.addTransation(request));
-		}
-	}
+	
 	
 	@GetMapping("/{custId}")
 	public ResponseEntity<?> getCustDetails(@PathVariable Long custId)

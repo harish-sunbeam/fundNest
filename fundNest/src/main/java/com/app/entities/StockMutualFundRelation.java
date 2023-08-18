@@ -1,5 +1,6 @@
 package com.app.entities;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,12 +26,13 @@ import lombok.ToString;
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @ManyToOne
-	    private StockDetails stockDetails;
-
+	    
 	    @ManyToOne
 	    private MFDetails mfDetails;
 
+	    @ManyToOne
+	    private StockDetails stockDetails;
+
+	    
 	    // Other fields, getters, setters
 	}
-

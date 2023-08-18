@@ -33,20 +33,20 @@ public class MFDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long MFId;
+	private Long mfId;
 	
 	@OneToOne
 	@JoinColumn(name="MF_company_id")
 	private MFCompanyDetails mfCompanyDetails;
 	
-//	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
-//	private List<StockDetails> stockDetails =new ArrayList<>();
+	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
+	private List<StockDetails> stockDetails =new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
 	private List<UserPortfolio> userPortfolio =new ArrayList<>();
 	
 	@OneToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<CustomerWalletTransaction> customerWalletTransaction =new ArrayList<>();
+	private List<CustomerOrderHistory> customerOrderHistory =new ArrayList<>();
 	
 	@Column(name="mf_name",length = 50,nullable = false,unique = true)
 	private String mfName;

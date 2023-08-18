@@ -45,7 +45,10 @@ public class SignUpDetails  {
 	private MFCompanyDetails mfCompanyDetails;
 	
 	@OneToMany(mappedBy = "signUpDetails",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<CustomerWalletTransaction> custWalletTransaction =new ArrayList<>();
+	private List<CustomerOrderHistory> customerOrderHistory =new ArrayList<>();
+	
+	@OneToMany(mappedBy = "signUpDetails",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<CustomerTransacHistory> customerTransacHistory =new ArrayList<>();
 	
 	@OneToMany(mappedBy = "signUpDetails",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<UserPortfolio> userPortfolio =new ArrayList<>();

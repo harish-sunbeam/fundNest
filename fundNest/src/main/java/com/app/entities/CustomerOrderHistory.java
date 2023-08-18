@@ -1,14 +1,18 @@
 package com.app.entities;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -24,13 +28,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name="cust_wallet_transaction")
+@Table(name="cust_order_history")
 //order No remaining
-public class CustomerWalletTransaction{
+public class CustomerOrderHistory{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long custWalletTransactId;
+	private Long custOrderNo;
+	
+	@ManyToOne
+	@JoinColumn(name = "cust_transac_history_id")
+	private CustomerTransacHistory custTransacHistory;
 	
 	@ManyToOne
 	@JoinColumn(name="cust_id")
@@ -40,29 +48,27 @@ public class CustomerWalletTransaction{
 	@JoinColumn(name="mf_id")
 	private MFDetails mfDetails;
 	
-	@Column(name="order_status",length = 20,nullable = false)
-	private String orderStatus;
+	@OneToOne
+	@JoinColumn(name = "cust_portfolio_id")
+	private UserPortfolio userPortfolio;
 	
-	@Column(name="transaction_status",length = 12,nullable = false)
-	private String transactionStatus;
+	@Column(name="order_status",length = 20,nullable = false)
+	@Enumerated(EnumType.STRING)
+	private OrderStatus orderStatus;
+	
 	
 	@Column(name="order_date",nullable = false)
 	private LocalDate orderDate;
 	
 	@Column(name="order_time",nullable = false)
-	private LocalDate orderTime;
+	private LocalTime orderTime;
 	
 	@Column(name="order_ammount",nullable = false)
 	private double orderAmmount;
 	
-	@Column(name="transaction_ammount",nullable = false)
-	private double transactionAmmount;
+
 	
-	@Column(name="opening_balance",nullable = false)
-	private double openingBalance;
 	
-	@Column(name="total_invested_ammount",nullable = false)
-	private double totalInvestedAmmount;
 	
 	
 	

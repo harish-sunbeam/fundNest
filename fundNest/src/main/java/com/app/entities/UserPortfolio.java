@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -44,8 +46,14 @@ public class UserPortfolio {
 	,inverseJoinColumns = @JoinColumn(name="cust_portfolio_id"))
 	private List<MFDetails> mfDetails=new ArrayList<>();
 	
+	@OneToOne(mappedBy = "userPortfolio",cascade = CascadeType.ALL,orphanRemoval = true)
+	private CustomerOrderHistory custWalletTransaction;	
+	
 	@Column(name="sip_ammount",nullable = false)
 	private double sipAmmount;
+	
+	@Column
+	private double units;
 	
 	@Column(name="one_time_ammount",nullable = false)
 	private double oneTimeAmmount;

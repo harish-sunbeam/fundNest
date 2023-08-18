@@ -53,17 +53,27 @@ public class CustomerServiceImpl implements CustomerService {
 		return mapper.map(persistentNom, AddNomineeResponseDTO.class);
 	}
 	
+	CustomerPersonalDetails custPersonalDetails =new CustomerPersonalDetails();
 	@Override
 	public CustomerUpdateProfileResponseDTO getCustDetails(SignUpDetails request) {
 		CustomerPersonalDetails custDetails=custPDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
-				//.orElseThrow(()-> new ResourceNotFoundException("Invalid Cust_id"));
+				custPersonalDetails=custDetails;
 		System.out.println("Cust_id :- "+custDetails.getSignUpDetails().getCustId());
 		return mapper.map(custDetails, CustomerUpdateProfileResponseDTO.class) ;
 	}
 	
 	@Override
-	public CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request) {
-		CustomerPersonalDetails custDetails=custPDetailsDao.save(mapper.map(request, CustomerPersonalDetails.class));
+	public CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request) {	
+		
+		custPersonalDetails.setCustFirstName(request.getCustFirstName());
+		custPersonalDetails.setCustLastName(request.getCustLastName());
+		custPersonalDetails.setCustMaritalStatus(request.getCustMaritalStatus());
+		custPersonalDetails.setCustOccupation(request.getCustOccupation());
+		custPersonalDetails.setCustAddress(request.getCustAddress());
+		custPersonalDetails.setCustState(request.getCustState());
+		custPersonalDetails.setCustPinCode(request.getCustPinCode());
+		
+		CustomerPersonalDetails custDetails=custPDetailsDao.save(mapper.map(custPersonalDetails, CustomerPersonalDetails.class));
 		return mapper.map(custDetails, CustomerUpdateProfileResponseDTO.class);
 	}
 }
