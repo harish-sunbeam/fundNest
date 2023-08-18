@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddProfileRequestDTO;
+import com.app.dto.CustTransacHistoryRequestDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
-import com.app.dto.CustomerWalletTransactionRequestDTO;
+import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.UserPortfolioRequestDTO;
 import com.app.entities.CustomerPersonalDetails;
+import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
+import com.app.entities.StockDetails;
+import com.app.service.CustOrderHistoryService;
+import com.app.service.CustTransacHistoryService;
 import com.app.service.CustomerService;
-import com.app.service.CustomerWalletTransactionService;
+
 import com.app.service.UserPortfolioService;
 import com.app.service.UserService;
 
@@ -40,7 +47,11 @@ public class CustomerController {
 	private UserPortfolioService userPortfolioService;
 	
 	@Autowired
-	private CustomerWalletTransactionService custWalletTransacService;
+	private CustOrderHistoryService custOrderHistoryService;
+	
+	@Autowired
+	private CustTransacHistoryService  custTransacHistoryService;
+	
 
 	@PostMapping("/addprofile")
 	public ResponseEntity<?> addCustProfile(@RequestBody AddProfileRequestDTO request) {
@@ -66,13 +77,7 @@ public class CustomerController {
 		}
 	}
 	
-	@PostMapping("/wallettransaction")
-	public ResponseEntity<?> addTransation(@RequestBody CustomerWalletTransactionRequestDTO request) {
-		{
-			System.out.println("Add transaction of user " + request);
-			return ResponseEntity.status(HttpStatus.CREATED).body(custWalletTransacService.addTransation(request));
-		}
-	}
+	
 	
 	@GetMapping("/{custId}")
 	public ResponseEntity<?> getCustDetails(@PathVariable Long custId)
@@ -94,6 +99,29 @@ public class CustomerController {
 		}
 	}
 	
+	@PostMapping("/orderhistory")
+	public ResponseEntity<?> addOrderHistory(@RequestBody CustomerOrderHistoryRequestDTO request) {
+		{
+			System.out.println("Add order History of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(custOrderHistoryService.addOrderHistory(request));
+		}
+	}
+	
+	@PostMapping("/transactionhistory")
+	public ResponseEntity<?> addTransacHistory(@RequestBody CustTransacHistoryRequestDTO request) {
+		{
+			System.out.println("Add Transac History of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(custTransacHistoryService.addTransacHistory(request));
+		}
+	}
+	
+
+	
+	@GetMapping("/transactionhistory/{custId}")
+	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
+        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTransacHistoryByCustId(custId);
+        return new ResponseEntity<>(children, HttpStatus.OK);
+    }
 	
 	
 }

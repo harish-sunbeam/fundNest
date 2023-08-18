@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
 	public void getOtpForForgotPass(String emailId) {
 		 cust=userDao.findByEmailId(emailId);
 		 userObj.setEmailId(emailId);
-		if(cust.getEmailId()!=null)   // if emailId is not null in database then proceed
+		if(cust.getEmailId()!=null)
 		{
 			String otp = generateOTP();
 			sendOTPEmail(emailId, otp);

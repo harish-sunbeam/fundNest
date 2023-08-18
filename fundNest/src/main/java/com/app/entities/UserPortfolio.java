@@ -47,7 +47,7 @@ public class UserPortfolio {
 	private List<MFDetails> mfDetails=new ArrayList<>();
 	
 	@OneToOne(mappedBy = "userPortfolio",cascade = CascadeType.ALL,orphanRemoval = true)
-	private CustomerWalletTransaction custWalletTransaction;	
+	private CustomerOrderHistory custWalletTransaction;	
 	
 	@Column(name="sip_ammount",nullable = false)
 	private double sipAmmount;

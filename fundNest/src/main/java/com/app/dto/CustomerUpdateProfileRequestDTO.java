@@ -19,18 +19,9 @@ import lombok.ToString;
 @ToString
 public class CustomerUpdateProfileRequestDTO {
 
-	private Long custPersonalDetailsId;
-
-
-	//private Long custId;
-
 	private String custFirstName;
 
 	private String custLastName;
-
-	private String custPanNo;
-
-	private String custGender;
 
 	private String custMaritalStatus;
 
@@ -42,5 +33,4 @@ public class CustomerUpdateProfileRequestDTO {
 
 	private int custPinCode;
 
-	private LocalDate custDOB;
 }

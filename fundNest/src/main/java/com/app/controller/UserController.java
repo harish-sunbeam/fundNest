@@ -93,7 +93,7 @@ public class UserController {
     }
     
     @PostMapping("/storenewpass")
-    public ResponseEntity<?> storeNewPass(@RequestBody EditPassDTO pass) {  //here return type ResponseEntity depends on return statement
+    public ResponseEntity<?> storeNewPass(@RequestBody EditPassDTO pass) {
        
         if (isVerified1) {
         	userService.storeUserDataWithNewPass(pass);
