@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddProfileRequestDTO;
+import com.app.dto.CustTransacHistoryRequestDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.UserPortfolioRequestDTO;
 import com.app.entities.CustomerPersonalDetails;
+import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
+import com.app.entities.StockDetails;
 import com.app.service.CustOrderHistoryService;
+import com.app.service.CustTransacHistoryService;
 import com.app.service.CustomerService;
 
 import com.app.service.UserPortfolioService;
@@ -42,6 +48,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustOrderHistoryService custOrderHistoryService;
+	
+	@Autowired
+	private CustTransacHistoryService  custTransacHistoryService;
 	
 
 	@PostMapping("/addprofile")
@@ -90,13 +99,37 @@ public class CustomerController {
 		}
 	}
 	
-	@PostMapping("/order")
+	@PostMapping("/orderhistory")
 	public ResponseEntity<?> addOrderHistory(@RequestBody CustomerOrderHistoryRequestDTO request) {
 		{
 			System.out.println("Add order History of user " + request);
 			return ResponseEntity.status(HttpStatus.CREATED).body(custOrderHistoryService.addOrderHistory(request));
 		}
 	}
+	
+	@PostMapping("/transactionhistory")
+	public ResponseEntity<?> addTransacHistory(@RequestBody CustTransacHistoryRequestDTO request) {
+		{
+			System.out.println("Add Transac History of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(custTransacHistoryService.addTransacHistory(request));
+		}
+	}
+	
+//	@GetMapping("/transactionhistory/{custId}")
+//	public ResponseEntity<?> getCustTransacHistory(@PathVariable Long custId)
+//	{
+//		System.out.println("In get Cust Details"+ custId);
+//		SignUpDetails cust=userService.getCustFromId(custId);
+//		
+//		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustDetails(cust));
+//		
+//	}
+	
+	@GetMapping("/transactionhistory/{custId}")
+	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
+        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTransacHistoryByCustId(custId);
+        return new ResponseEntity<>(children, HttpStatus.OK);
+    }
 	
 	
 }
