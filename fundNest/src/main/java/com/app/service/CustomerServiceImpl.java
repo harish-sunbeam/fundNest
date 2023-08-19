@@ -76,4 +76,12 @@ public class CustomerServiceImpl implements CustomerService {
 		CustomerPersonalDetails custDetails=custPDetailsDao.save(mapper.map(custPersonalDetails, CustomerPersonalDetails.class));
 		return mapper.map(custDetails, CustomerUpdateProfileResponseDTO.class);
 	}
+
+	@Override
+	public AddNomineeResponseDTO getCustomerNomineeDetails(SignUpDetails request) {
+		
+		CustomerNomineeDetails custDetails=custNomDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
+	
+		return mapper.map(custDetails,  AddNomineeResponseDTO.class);
+	}
 }

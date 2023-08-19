@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.CustTransacHistoryRequestDTO;
+import com.app.dto.CustTransacHistoryResponseDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerOrderHistoryRequestDTO;
+import com.app.dto.CustomerOrderHistoryResponseDTO;
 import com.app.dto.UserPortfolioRequestDTO;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.CustomerTransacHistory;
@@ -99,7 +101,7 @@ public class CustomerController {
 		}
 	}
 	
-	@PostMapping("/orderhistory")
+	@PostMapping("/addorderhistory")
 	public ResponseEntity<?> addOrderHistory(@RequestBody CustomerOrderHistoryRequestDTO request) {
 		{
 			System.out.println("Add order History of user " + request);
@@ -107,7 +109,7 @@ public class CustomerController {
 		}
 	}
 	
-	@PostMapping("/transactionhistory")
+	@PostMapping("/addtransactionhistory")
 	public ResponseEntity<?> addTransacHistory(@RequestBody CustTransacHistoryRequestDTO request) {
 		{
 			System.out.println("Add Transac History of user " + request);
@@ -117,11 +119,29 @@ public class CustomerController {
 	
 
 	
-	@GetMapping("/transactionhistory/{custId}")
-	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
-        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTHByCustId(custId);
+	@GetMapping("/gettransactionhistory/{custId}")
+	public ResponseEntity<List<CustTransacHistoryResponseDTO>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
+		List<CustTransacHistoryResponseDTO> children = custTransacHistoryService.getCustTHByCustId(custId);
         return new ResponseEntity<>(children, HttpStatus.OK);
     }
+	
+	
+	@GetMapping("/getorderhistory/{custId}")
+	public ResponseEntity<List<CustomerOrderHistoryResponseDTO>> getCustOrderHistoryByCustId(@PathVariable Long custId) {
+		List<CustomerOrderHistoryResponseDTO> children = custOrderHistoryService.getCustOrderHistoryByCustId(custId);
+        return new ResponseEntity<>(children, HttpStatus.OK);
+    }
+	
+	
+	@GetMapping("/nom/{custId}")
+	public ResponseEntity<?> getCustomerNomineeDetails(@PathVariable Long custId)
+	{
+		System.out.println("In get Cust Nominee Details"+ custId);
+		SignUpDetails cust=userService.getCustFromId(custId);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerNomineeDetails(cust));
+		
+	}
 	
 	
 }
