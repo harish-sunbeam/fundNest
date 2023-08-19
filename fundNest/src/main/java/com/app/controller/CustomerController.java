@@ -119,9 +119,20 @@ public class CustomerController {
 	
 	@GetMapping("/transactionhistory/{custId}")
 	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
-        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTransacHistoryByCustId(custId);
+        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTHByCustId(custId);
         return new ResponseEntity<>(children, HttpStatus.OK);
     }
+	
+	
+	@GetMapping("/nom/{custId}")
+	public ResponseEntity<?> getCustomerNomineeDetails(@PathVariable Long custId)
+	{
+		System.out.println("In get Cust Nominee Details"+ custId);
+		SignUpDetails cust=userService.getCustFromId(custId);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerNomineeDetails(cust));
+		
+	}
 	
 	
 }
