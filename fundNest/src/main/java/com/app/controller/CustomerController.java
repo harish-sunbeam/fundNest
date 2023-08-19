@@ -21,6 +21,7 @@ import com.app.dto.CustTransacHistoryRequestDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.UserPortfolioRequestDTO;
+import com.app.entities.CustomerOrderHistory;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
@@ -117,11 +118,25 @@ public class CustomerController {
 	
 
 	
+//	@GetMapping("/transactionhistory/{custId}")
+//	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
+//        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTransacHistoryByCustId(custId);
+//        return new ResponseEntity<>(children, HttpStatus.OK);
+//    }
+	
+	
 	@GetMapping("/transactionhistory/{custId}")
 	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
-        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTransacHistoryByCustId(custId);
+        List<CustomerTransacHistory> children = userService.getTransacHistoryByCustId(custId);
         return new ResponseEntity<>(children, HttpStatus.OK);
     }
-	
+
+
+    @GetMapping("/order-history/{custId}")
+    public ResponseEntity<List<CustomerOrderHistory>>  getCustomerOrderHistoryByCustomerId(@PathVariable Long custId) {
+        List<CustomerOrderHistory> child = custOrderHistoryService.getAllCustomerOrderHistory(custId);
+        return new ResponseEntity<>(child, HttpStatus.OK);
+        
+    }
 	
 }

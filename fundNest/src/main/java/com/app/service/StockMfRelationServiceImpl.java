@@ -35,7 +35,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 
 		for (StockMutualFundRelation list : relationList) {
 			StockDetails stockDetail = list.getStockDetails();
-			Hibernate.initialize(stockDetail.getMfDetails()); // Initialize the collection
+			Hibernate.initialize(stockDetail); // Initialize the collection
 			stockDetails.add(stockDetail);
 		}
 

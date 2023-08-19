@@ -47,16 +47,14 @@ public class CustTransacHistoryServiceImpl implements CustTransacHistoryService 
 	@Override
 	public List<CustomerTransacHistory> getCustTransacHistoryByCustId(Long CustId) {
 		
-		SignUpDetails signUpDetails = userDao.findById(CustId).orElseThrow(()-> new ResourceNotFoundException("Invalid Id from transaction list"));
+		List<CustomerTransacHistory> custTransactionHistory = custTransacHistoryDao.findBySignUpDetailsCustId(CustId);
 		
-		if (signUpDetails!=null) {
-			Hibernate.initialize(signUpDetails.getCustomerTransacHistory());
-			//return signUpDetails.getCustomerTransacHistory();
+			Hibernate.initialize(custTransactionHistory);
 			Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
-	        return mapper.map(signUpDetails.getCustomerTransacHistory(), listType);
+	        return mapper.map(custTransactionHistory, listType);
 			
-		}
-		return null;
+		
+		
 		
 //		 List<CustomerTransacHistory> list=custTransacHistoryDao.findBySignUpDetailsCustId(CustId);
 //		 

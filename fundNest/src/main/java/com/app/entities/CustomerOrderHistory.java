@@ -62,11 +62,6 @@ public class CustomerOrderHistory{
 	
 	@Column(name="order_ammount",nullable = false)
 	private double orderAmmount;
-	
 
-	
-	
-	
-	
 	
 }

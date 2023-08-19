@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,18 @@ public class CustomerOrderHistoryServiceImpl implements CustOrderHistoryService 
 		return mapper.map(custOrderHistory, CustomerOrderHistoryResponseDTO.class);
 	}
 
+
+	@Override
+	public List<CustomerOrderHistory> getAllCustomerOrderHistory(Long custId) {
+		// TODO Auto-generated method stub
+		return custOrderHistoryDao.findBySignUpDetailsCustId(custId);
+    }
+	
+	
+	
+		
+	    
 }
+
 
 

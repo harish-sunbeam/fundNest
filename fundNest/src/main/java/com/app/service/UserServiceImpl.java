@@ -1,12 +1,14 @@
 package com.app.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +26,7 @@ import com.app.dto.LogInResponseDTO;
 import com.app.dto.OTPVerificationDTO;
 import com.app.dto.SignUpRequestDTO;
 import com.app.dto.SignUpResponseDTO;
+import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
 import com.app.entities.UserType;
 
@@ -137,6 +140,18 @@ public class UserServiceImpl implements UserService {
 
 		return mapper.map(persistentUser, SignUpResponseDTO.class);
 				
+	}
+
+	@Override
+	public List<CustomerTransacHistory> getTransacHistoryByCustId(Long custId) {
+		// TODO Auto-generated method stub
+		Optional<SignUpDetails> signUpDetails = userDao.findByCustId(custId);
+		if(signUpDetails.isPresent()) {
+			SignUpDetails obj = signUpDetails.get();
+			Hibernate.initialize(obj.getCustomerTransacHistory());
+			return obj.getCustomerTransacHistory();
+		}
+		return null;
 	}
 	
 

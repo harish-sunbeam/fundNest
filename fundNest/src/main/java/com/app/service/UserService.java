@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -10,6 +12,7 @@ import com.app.dto.LogInResponseDTO;
 import com.app.dto.OTPVerificationDTO;
 import com.app.dto.SignUpRequestDTO;
 import com.app.dto.SignUpResponseDTO;
+import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
 
 public interface UserService {
@@ -25,5 +28,10 @@ public interface UserService {
 	 void getOtpForForgotPass(String emailId);
 	 
 	 SignUpResponseDTO storeUserDataWithNewPass(EditPassDTO newPass);
+	 
+	 
+	 List<CustomerTransacHistory> getTransacHistoryByCustId(Long custId);
 }
+
+
 
