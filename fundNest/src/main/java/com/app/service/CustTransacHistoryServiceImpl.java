@@ -71,5 +71,23 @@ public class CustTransacHistoryServiceImpl implements CustTransacHistoryService 
 		 
 	}
 
+	@Override
+	public List<CustomerTransacHistory> getCustTHByCustId(Long custId) {
+		List<CustomerTransacHistory> list=custTransacHistoryDao.findAll();
+		
+		
+		
+		List<CustomerTransacHistory> newList  = new ArrayList<>();
+		 for (CustomerTransacHistory custTransacList: list) {
+			 Hibernate.initialize(custTransacList);
+			 Long id=custTransacList.getSignUpDetails().getCustId();
+			 if(id==custId)
+			 newList.add(custTransacList);	
+		}
+		 Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
+		return mapper.map(newList, listType);
+	}
+
+	
 }
 
