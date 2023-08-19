@@ -17,9 +17,9 @@ public interface CustomerService {
 	
 	AddNomineeResponseDTO addCustNominee(AddNomineeRequestDTO request);
 	
-	CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request);
+	CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request,Long custId);
 
-	CustomerUpdateProfileResponseDTO getCustDetails(SignUpDetails request);
+	CustomerUpdateProfileResponseDTO getCustDetails(Long custId);
 	
 	AddNomineeResponseDTO getCustomerNomineeDetails(SignUpDetails request);
 }

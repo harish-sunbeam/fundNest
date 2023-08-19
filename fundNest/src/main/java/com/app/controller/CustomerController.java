@@ -79,23 +79,23 @@ public class CustomerController {
 	
 	
 	
-	@GetMapping("/{custId}")
+	@GetMapping("/getcustprofiledetails/{custId}")
 	public ResponseEntity<?> getCustDetails(@PathVariable Long custId)
 	{
 		System.out.println("In get Cust Details"+ custId);
-		SignUpDetails cust=userService.getCustFromId(custId);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustDetails(cust));
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustDetails(custId));
 		
 	}
 	
 	
-	@PutMapping("/updateprofile")
-	public ResponseEntity<?> updateCustProfile(@RequestBody CustomerUpdateProfileRequestDTO request) {
+	@PutMapping("/updateprofile/{custId}")
+	public ResponseEntity<?> updateCustProfile(@RequestBody CustomerUpdateProfileRequestDTO request,@PathVariable Long custId) {
 		{
 			
 			System.out.println("Updated profile of user " + request);
-			return ResponseEntity.status(HttpStatus.CREATED).body(custService.updateCustProfile(request));
+			return ResponseEntity.status(HttpStatus.CREATED).body(custService.updateCustProfile(request,custId));
 		}
 	}
 	

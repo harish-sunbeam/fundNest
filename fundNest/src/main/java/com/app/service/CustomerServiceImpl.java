@@ -53,18 +53,22 @@ public class CustomerServiceImpl implements CustomerService {
 		return mapper.map(persistentNom, AddNomineeResponseDTO.class);
 	}
 	
-	CustomerPersonalDetails custPersonalDetails =new CustomerPersonalDetails();
+	
+	
 	@Override
-	public CustomerUpdateProfileResponseDTO getCustDetails(SignUpDetails request) {
-		CustomerPersonalDetails custDetails=custPDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
-				custPersonalDetails=custDetails;
-		System.out.println("Cust_id :- "+custDetails.getSignUpDetails().getCustId());
+	public CustomerUpdateProfileResponseDTO getCustDetails(Long custId) {
+		CustomerPersonalDetails custDetails=custPDetailsDao.findBySignUpDetailsCustId(custId);
 		return mapper.map(custDetails, CustomerUpdateProfileResponseDTO.class) ;
 	}
 	
 	@Override
-	public CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request) {	
-		
+	public CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request,Long custId) {	
+		SignUpDetails signUpDetails =userDao.findById(custId)
+				.orElseThrow(()-> new ResourceNotFoundException("Invalid cust_id from CustServImpl"));
+		Long id=signUpDetails.getCustId();
+		CustomerPersonalDetails oldCustPDetails=custPDetailsDao.findBySignUpDetailsCustId(id);
+		CustomerPersonalDetails	custPersonalDetails =new CustomerPersonalDetails();
+		custPersonalDetails.setCustPersonalDetailsId(oldCustPDetails.getCustPersonalDetailsId());
 		custPersonalDetails.setCustFirstName(request.getCustFirstName());
 		custPersonalDetails.setCustLastName(request.getCustLastName());
 		custPersonalDetails.setCustMaritalStatus(request.getCustMaritalStatus());
@@ -72,6 +76,10 @@ public class CustomerServiceImpl implements CustomerService {
 		custPersonalDetails.setCustAddress(request.getCustAddress());
 		custPersonalDetails.setCustState(request.getCustState());
 		custPersonalDetails.setCustPinCode(request.getCustPinCode());
+		custPersonalDetails.setCustDOB(oldCustPDetails.getCustDOB());
+		custPersonalDetails.setCustPanNo(oldCustPDetails.getCustPanNo());
+		custPersonalDetails.setCustGender(oldCustPDetails.getCustGender());
+		custPersonalDetails.setSignUpDetails(signUpDetails);
 		
 		CustomerPersonalDetails custDetails=custPDetailsDao.save(mapper.map(custPersonalDetails, CustomerPersonalDetails.class));
 		return mapper.map(custDetails, CustomerUpdateProfileResponseDTO.class);

@@ -39,8 +39,7 @@ public class MFDetails {
 	@JoinColumn(name="MF_company_id")
 	private MFCompanyDetails mfCompanyDetails;
 	
-//	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
-//	private List<StockDetails> stockDetails =new ArrayList<>();
+
 	
 	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
 	private List<UserPortfolio> userPortfolio =new ArrayList<>();
