@@ -124,4 +124,15 @@ public class CustomerController {
     }
 	
 	
+	@GetMapping("/nom/{custId}")
+	public ResponseEntity<?> getCustomerNomineeDetails(@PathVariable Long custId)
+	{
+		System.out.println("In get Cust Nominee Details"+ custId);
+		SignUpDetails cust=userService.getCustFromId(custId);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerNomineeDetails(cust));
+		
+	}
+	
+	
 }
