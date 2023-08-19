@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.app.entities.MFDetails;
 import com.app.entities.OrderStatus;
 
 import lombok.AllArgsConstructor;
@@ -24,4 +25,6 @@ public class CustomerOrderHistoryResponseDTO {
 	private LocalDateTime orderTime;
 
 	private double orderAmmount;
+	
+	private MFDetails mfDetails;
 }

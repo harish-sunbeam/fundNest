@@ -1,5 +1,7 @@
 package com.app.service;
 
+import com.app.dto.AddKYCDetailsRequestDTO;
+import com.app.dto.AddKYCDetailsResponseDTO;
 import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddNomineeResponseDTO;
 import com.app.dto.AddProfileRequestDTO;
@@ -13,9 +15,11 @@ import com.app.entities.SignUpDetails;
 
 public interface CustomerService {
 
-	AddProfileResponseDTO addCustProfile(AddProfileRequestDTO request);
+	AddProfileResponseDTO addCustProfile(AddProfileRequestDTO request, Long custId);
 	
-	AddNomineeResponseDTO addCustNominee(AddNomineeRequestDTO request);
+	AddNomineeResponseDTO addCustNominee(AddNomineeRequestDTO request, Long custId);
+	
+	AddKYCDetailsResponseDTO addCustKYC(AddKYCDetailsRequestDTO request,Long custId);
 	
 	CustomerUpdateProfileResponseDTO updateCustProfile(CustomerUpdateProfileRequestDTO request);
 

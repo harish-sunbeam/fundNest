@@ -23,10 +23,9 @@ public class MFCompanyController {
 	private MfCompanyService mfCompanyService; 
 	
 	// MF COMPANY PROFILE CREATION
-		//MFCompanyProfileRequestDTO mfCompanyProfile=new MFCompanyProfileRequestDTO();
-		@PostMapping("/myprofilecompany")
-		public ResponseEntity<?> mfCompanyProfile(@RequestBody MFCompanyProfileRequestDTO requestDTO) {
+		@PostMapping("/myprofilecompany/{custId}")
+		public ResponseEntity<?> mfCompanyProfile(@RequestBody MFCompanyProfileRequestDTO requestDTO,Long custId) {
 			System.out.println("in add new mfCompany" + requestDTO);
-			return ResponseEntity.status(HttpStatus.CREATED).body(mfCompanyService.mfCompanyProfile(requestDTO));
+			return ResponseEntity.status(HttpStatus.CREATED).body(mfCompanyService.mfCompanyProfile(requestDTO,custId));
 		}
 }

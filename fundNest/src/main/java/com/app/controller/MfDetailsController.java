@@ -21,7 +21,8 @@ public class MfDetailsController {
 
 	@Autowired
 	private StockMfRelationService stockMfRelationService;
-	
+
+	// To get The List of stock Details By mutual Fund Id
 	@GetMapping("/{mutualFundId}")
 	public ResponseEntity<List<StockDetails>> getChildrenByParentId(@PathVariable Long mutualFundId) {
         List<StockDetails> children = stockMfRelationService.getStockDetailsByMfId(mutualFundId);

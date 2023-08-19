@@ -37,55 +37,46 @@ public class CustTransacHistoryServiceImpl implements CustTransacHistoryService 
 	
 	private LocalTime time;
 	
+	// Add the Transaction of the Customer
 	@Override
-	public CustTransacHistoryResponseDTO addTransacHistory(CustTransacHistoryRequestDTO request) {
+	public CustTransacHistoryResponseDTO addTransacHistory(CustTransacHistoryRequestDTO request,Long custId) {
 		
-		CustomerTransacHistory customerTransacHistory =custTransacHistoryDao.save(mapper.map(request, CustomerTransacHistory.class));
+		SignUpDetails signUpDetails = userDao.findById(custId).orElseThrow(()-> new ResourceNotFoundException("Invalid UserId from CustomerServiceImpl"));
+		
+		CustomerTransacHistory customerTransacHistory1 = new CustomerTransacHistory();
+		
+		customerTransacHistory1.setOpeningBalance(request.getOpeningBalance());
+		customerTransacHistory1.setTotalInvestedAmmount(request.getTotalInvestedAmmount());
+		customerTransacHistory1.setTransactionAmmount(request.getTransactionAmmount());
+		customerTransacHistory1.setTransactionStatus(request.getTransactionStatus());
+		customerTransacHistory1.setTransactionTime(request.getTransactionTime());
+		customerTransacHistory1.setSignUpDetails(signUpDetails);
+		
+		CustomerTransacHistory customerTransacHistory =custTransacHistoryDao.save(mapper.map(customerTransacHistory1, CustomerTransacHistory.class));
 		return mapper.map(customerTransacHistory, CustTransacHistoryResponseDTO.class);
 	}
 	
+	
+	// Retrieve the whole List of the Transaction Details		
 	@Override
-	public List<CustomerTransacHistory> getCustTransacHistoryByCustId(Long CustId) {
-		
-		SignUpDetails signUpDetails = userDao.findById(CustId).orElseThrow(()-> new ResourceNotFoundException("Invalid Id from transaction list"));
-		
-		if (signUpDetails!=null) {
-			Hibernate.initialize(signUpDetails.getCustomerTransacHistory());
-			//return signUpDetails.getCustomerTransacHistory();
-			Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
-	        return mapper.map(signUpDetails.getCustomerTransacHistory(), listType);
-			
-		}
-		return null;
-		
-//		 List<CustomerTransacHistory> list=custTransacHistoryDao.findBySignUpDetailsCustId(CustId);
-//		 
-//		 List<CustomerTransacHistory> newList  = new ArrayList<>();
-//		 for (CustomerTransacHistory custTransacList: list) {
-//			 Hibernate.initialize(custTransacList);
-//			 newList.add(custTransacList);	
-//		}
-//		
-//		  Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
-//	        return mapper.map(list, listType);
-		 
-	}
+	public List<CustTransacHistoryResponseDTO> getCustTHByCustId(Long custId) {
+		List<CustomerTransacHistory> list=custTransacHistoryDao.findALLBySignUpDetailsCustId(custId);
 
-	@Override
-	public List<CustomerTransacHistory> getCustTHByCustId(Long custId) {
-		List<CustomerTransacHistory> list=custTransacHistoryDao.findAll();
-		
-		
-		
-		List<CustomerTransacHistory> newList  = new ArrayList<>();
+		List<CustTransacHistoryResponseDTO> newList  = new ArrayList<>();
 		 for (CustomerTransacHistory custTransacList: list) {
-			 Hibernate.initialize(custTransacList);
-			 Long id=custTransacList.getSignUpDetails().getCustId();
-			 if(id==custId)
-			 newList.add(custTransacList);	
-		}
-		 Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
-		return mapper.map(newList, listType);
+			 CustTransacHistoryResponseDTO dto = new CustTransacHistoryResponseDTO();
+			 
+			 dto.setOpeningBalance(custTransacList.getOpeningBalance());
+			 dto.setTotalInvestedAmmount(custTransacList.getTotalInvestedAmmount());
+			 dto.setTransactionAmmount(custTransacList.getTransactionAmmount());
+			 dto.setTransactionStatus(custTransacList.getTransactionStatus());
+			 dto.setTransactionTime(custTransacList.getTransactionTime());
+			 
+			 newList.add(dto);
+			 
+			}
+		 
+		 	return newList;
 	}
 
 	

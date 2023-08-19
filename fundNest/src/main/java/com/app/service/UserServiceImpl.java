@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
 
 	SignUpRequestDTO userObj = new SignUpRequestDTO();
 
+	// Send and store the OTP
 	public void sendOTPAndStoreUserData(SignUpRequestDTO userRegistrationDTO) {
 		userObj = userRegistrationDTO;
 		String otp = generateOTP();
@@ -51,12 +52,15 @@ public class UserServiceImpl implements UserService {
 		otpMap.put(userRegistrationDTO.getEmailId(), otp);
 	}
 
+	
+	// OTP Verification
 	public boolean verifyOTP(OTPVerificationDTO otpVerificationDTO) {
 		String storedOTP = otpMap.get(userObj.getEmailId());
 		otpMap=null;
 		return storedOTP != null && storedOTP.equals(otpVerificationDTO.getOtp());
 	}
 
+	// To check whether the user is the CUSTOMER or the Manager 
 	@Override
 	public SignUpResponseDTO storeUserData(SignUpRequestDTO request, int flag) {
 
@@ -70,6 +74,8 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(persistentUser, SignUpResponseDTO.class);
 	}
 
+	
+	// To Generate the OTP
 	private String generateOTP() {
 		int otpLength = 6;
 		String numbers = "0123456789";
@@ -83,6 +89,7 @@ public class UserServiceImpl implements UserService {
 		return otp.toString();
 	}
 
+	// tO SEND THE OTP email
 	private void sendOTPEmail(String email, String otp) {
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -97,6 +104,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	// To Sigin
 	@Override
 	public LogInResponseDTO logInUser(LogInRequestDTO request) {
 		SignUpDetails user=userDao.findByEmailIdAndPassword(request.getEmail(), request.getPassword())
@@ -104,6 +112,8 @@ public class UserServiceImpl implements UserService {
 		return mapper.map(user, LogInResponseDTO.class);
 	}
 	
+	
+	// To signup
 	@Override
 	public SignUpDetails getCustFromId(Long id) {
 		SignUpDetails cust=userDao.findById(id)
@@ -112,7 +122,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 
-	//latest form Harish
+	// Forgot password and creating the OTP
 	SignUpDetails cust =new SignUpDetails();
 	@Override
 	public void getOtpForForgotPass(String emailId) {
@@ -129,6 +139,8 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	
+	// Store the New Password
 	@Override
 	public SignUpResponseDTO storeUserDataWithNewPass(EditPassDTO newPass) {
 		

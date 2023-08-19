@@ -28,6 +28,8 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 
 	@Override
 	@Transactional
+	
+	// Get the List of the Stocks By Mutual Fund Id
 	public List<StockDetails> getStockDetailsByMfId(Long mfId) {
 		List<StockMutualFundRelation> relationList = stockMfRelationDao.findByMfDetailsMfId(mfId);
 
