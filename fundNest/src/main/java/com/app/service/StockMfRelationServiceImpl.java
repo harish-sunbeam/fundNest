@@ -26,6 +26,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 	@Autowired
 	private ModelMapper mapper;
 
+	//to get stocks included in mutual fund by using mfId
 	@Override
 	@Transactional
 	public List<StockDetails> getStockDetailsByMfId(Long mfId) {
