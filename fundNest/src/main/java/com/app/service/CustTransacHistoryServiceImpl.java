@@ -43,29 +43,49 @@ public class CustTransacHistoryServiceImpl implements CustTransacHistoryService 
 		CustomerTransacHistory customerTransacHistory =custTransacHistoryDao.save(mapper.map(request, CustomerTransacHistory.class));
 		return mapper.map(customerTransacHistory, CustTransacHistoryResponseDTO.class);
 	}
-			
+	
 	@Override
-	public List<CustTransacHistoryResponseDTO> getCustTHByCustId(Long custId) {
-		List<CustomerTransacHistory> list=custTransacHistoryDao.findALLBySignUpDetailsCustId(custId);
+	public List<CustomerTransacHistory> getCustTransacHistoryByCustId(Long CustId) {
 		
+		SignUpDetails signUpDetails = userDao.findById(CustId).orElseThrow(()-> new ResourceNotFoundException("Invalid Id from transaction list"));
 		
+		if (signUpDetails!=null) {
+			Hibernate.initialize(signUpDetails.getCustomerTransacHistory());
+			//return signUpDetails.getCustomerTransacHistory();
+			Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
+	        return mapper.map(signUpDetails.getCustomerTransacHistory(), listType);
+			
+		}
+		return null;
 		
-		
-		List<CustTransacHistoryResponseDTO> newList  = new ArrayList<>();
-		 for (CustomerTransacHistory custTransacList: list) {
-			 CustTransacHistoryResponseDTO dto = new CustTransacHistoryResponseDTO();
-			 
-			 dto.setOpeningBalance(custTransacList.getOpeningBalance());
-			 dto.setTotalInvestedAmmount(custTransacList.getTotalInvestedAmmount());
-			 dto.setTransactionAmmount(custTransacList.getTransactionAmmount());
-			 dto.setTransactionStatus(custTransacList.getTransactionStatus());
-			 dto.setTransactionTime(custTransacList.getTransactionTime());
-			 
-			 newList.add(dto);
-			 
-			}
+//		 List<CustomerTransacHistory> list=custTransacHistoryDao.findBySignUpDetailsCustId(CustId);
+//		 
+//		 List<CustomerTransacHistory> newList  = new ArrayList<>();
+//		 for (CustomerTransacHistory custTransacList: list) {
+//			 Hibernate.initialize(custTransacList);
+//			 newList.add(custTransacList);	
+//		}
+//		
+//		  Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
+//	        return mapper.map(list, listType);
 		 
-		 	return newList;
+	}
+
+	@Override
+	public List<CustomerTransacHistory> getCustTHByCustId(Long custId) {
+		List<CustomerTransacHistory> list=custTransacHistoryDao.findAll();
+		
+		
+		
+		List<CustomerTransacHistory> newList  = new ArrayList<>();
+		 for (CustomerTransacHistory custTransacList: list) {
+			 Hibernate.initialize(custTransacList);
+			 Long id=custTransacList.getSignUpDetails().getCustId();
+			 if(id==custId)
+			 newList.add(custTransacList);	
+		}
+		 Type listType = new TypeToken<List<CustomerTransacHistory>>() {}.getType();
+		return mapper.map(newList, listType);
 	}
 
 	

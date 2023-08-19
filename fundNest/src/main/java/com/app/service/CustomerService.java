@@ -21,5 +21,4 @@ public interface CustomerService {
 
 	CustomerUpdateProfileResponseDTO getCustDetails(SignUpDetails request);
 	
-	AddNomineeResponseDTO getCustomerNomineeDetails(SignUpDetails request);
 }

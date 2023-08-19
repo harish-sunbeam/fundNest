@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +36,7 @@ public class CustomerTransacHistory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long custTransacHistoryId;
 	
-	@ManyToOne(targetEntity = SignUpDetails.class,fetch= FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="cust_id")
 	private SignUpDetails signUpDetails;
 	

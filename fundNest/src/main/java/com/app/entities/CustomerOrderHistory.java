@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,15 +41,15 @@ public class CustomerOrderHistory{
 	@JoinColumn(name = "cust_transac_history_id")
 	private CustomerTransacHistory custTransacHistory;
 	
-	@ManyToOne(targetEntity = SignUpDetails.class,fetch= FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="cust_id")
 	private SignUpDetails signUpDetails;
 	
-	@ManyToOne(targetEntity = MFDetails.class,fetch= FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="mf_id")
 	private MFDetails mfDetails;
 	
-	@OneToOne(targetEntity =UserPortfolio.class,fetch= FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name = "cust_portfolio_id")
 	private UserPortfolio userPortfolio;
 	
