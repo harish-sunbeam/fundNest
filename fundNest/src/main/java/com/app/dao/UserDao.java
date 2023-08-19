@@ -13,7 +13,6 @@ public interface UserDao extends JpaRepository<SignUpDetails,Long > {
 	
 	SignUpDetails findByEmailId(String emailId);
 	
-	Optional<SignUpDetails> findByCustId(Long custId);
 
 	
 }
