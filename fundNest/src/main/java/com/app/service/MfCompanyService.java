@@ -5,6 +5,6 @@ import com.app.dto.MFProfileCompanyResponseDTO;
 
 public interface MfCompanyService {
 
-	MFProfileCompanyResponseDTO mfCompanyProfile(MFCompanyProfileRequestDTO requestDTO);
+	MFProfileCompanyResponseDTO mfCompanyProfile(MFCompanyProfileRequestDTO requestDTO,Long custId);
 	
 }

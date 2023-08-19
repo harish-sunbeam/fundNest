@@ -23,6 +23,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="cust_KYC_details")
+
 public class CustomerKYCDetails {
 
 	@Id

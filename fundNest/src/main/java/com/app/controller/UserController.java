@@ -44,6 +44,7 @@ public class UserController {
         return ResponseEntity.ok("OTP sent for verification.");
     }
 	
+	// SignUp as a Mutual Fund Company
 	@PostMapping("/registerascompany")
 	public ResponseEntity<String> registerCompany(@RequestBody SignUpRequestDTO userRegistrationDTO) {
         userObj=userRegistrationDTO;
@@ -52,6 +53,7 @@ public class UserController {
         return ResponseEntity.ok("OTP sent for verification.");
     }
 
+	// To verify the OTP
     @PostMapping("/verify-otp")
     public ResponseEntity<?> verifyOTP(@RequestBody OTPVerificationDTO otpVerificationDTO) {
         boolean isVerified = userService.verifyOTP(otpVerificationDTO);
@@ -63,6 +65,7 @@ public class UserController {
         }
     }
     
+    // Sign of the User
     @PostMapping("/login")
     public ResponseEntity<?> signInUser(@RequestBody LogInRequestDTO request) {
         System.out.println("Inside login"+ request);
@@ -71,7 +74,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
     
-    //Latest from harish
+    // Gorget Password Otp Getting
     String email=new String();
     @PostMapping("/getotpforforgotpass")
 	public ResponseEntity<String> getOtpForForgotPass(@RequestBody ForgetPassOtpDTO emailId) {
@@ -92,6 +95,8 @@ public class UserController {
         }
     }
     
+    
+    // Storing the new password
     @PostMapping("/storenewpass")
     public ResponseEntity<?> storeNewPass(@RequestBody EditPassDTO pass) {
        
