@@ -13,7 +13,7 @@ import com.app.entities.SignUpDetails;
 
 public interface CustomerPersonalDetailsDao extends JpaRepository<CustomerPersonalDetails,Long > {
 
-	CustomerPersonalDetails findBySignUpDetailsCustId(Long custId);
+	CustomerPersonalDetails findBySignUpDetails(SignUpDetails signUpDetails);
 	
 	   
 	

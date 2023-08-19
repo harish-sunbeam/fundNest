@@ -1,5 +1,7 @@
 package com.app.dto;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,20 +13,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+public class AddKYCDetailsResponseDTO {
+	
+	private String bankName;
 
-public class MFDetailsResponseDTO {
-
-	private String mfName;
+	private long accNo;
 	
+	private String ifscCode;
 	
-	private double mfFundSize;
-	
-	
-	private double mfNAV;
-	
-	
-	private double mfTotalUnits;
-	
-	
-	private double mfInvestmentInEachStock;
+	private double annualIncome;
 }

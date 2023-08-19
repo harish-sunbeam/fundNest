@@ -20,6 +20,8 @@ public class UserPortfolioImpl implements UserPortfolioService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	
+	// Add the UserPortfolio to the customer
 	@Override
 	public UserPortfolioResponseDTO addInPortfolio(UserPortfolioRequestDTO request) {
 		
