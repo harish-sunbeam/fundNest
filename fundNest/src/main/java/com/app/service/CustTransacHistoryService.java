@@ -11,4 +11,6 @@ public interface CustTransacHistoryService {
 	CustTransacHistoryResponseDTO addTransacHistory(CustTransacHistoryRequestDTO request);
 	
 	 List<CustomerTransacHistory> getCustTransacHistoryByCustId(Long CustId);
+	 
+	 List<CustomerTransacHistory> getCustTHByCustId(Long custId);
 }

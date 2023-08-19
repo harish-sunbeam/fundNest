@@ -119,7 +119,7 @@ public class CustomerController {
 	
 	@GetMapping("/transactionhistory/{custId}")
 	public ResponseEntity<List<CustomerTransacHistory>> getCustTransacHistoryByCustId(@PathVariable Long custId) {
-        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTransacHistoryByCustId(custId);
+        List<CustomerTransacHistory> children = custTransacHistoryService.getCustTHByCustId(custId);
         return new ResponseEntity<>(children, HttpStatus.OK);
     }
 	
