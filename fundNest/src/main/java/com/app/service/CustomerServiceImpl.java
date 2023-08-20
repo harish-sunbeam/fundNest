@@ -148,4 +148,11 @@ public class CustomerServiceImpl implements CustomerService {
 	
 		return mapper.map(custDetails,  AddNomineeResponseDTO.class);
 	}
+
+
+	@Override
+	public AddKYCDetailsResponseDTO getCustomerKycDetails(SignUpDetails request) {
+		CustomerKYCDetails custkycDetails= custKYCDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
+		return mapper.map(custkycDetails,  AddKYCDetailsResponseDTO.class);
+	}
 }
