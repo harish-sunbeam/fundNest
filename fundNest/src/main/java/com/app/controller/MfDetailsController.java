@@ -40,8 +40,16 @@ public class MfDetailsController {
 		@PostMapping("/addmfdetails/{mfCompanyId}")
 		public ResponseEntity<?> addMfDetails(@RequestBody MFDetailsRequestDTO request, @PathVariable Long mfCompanyId) {
 			{
-				System.out.println("Add profile of user " + request);
+				System.out.println("addmfdetails of mfCompanyId " + request);
 				return ResponseEntity.status(HttpStatus.CREATED).body(mfDetailsService.addMfDetails(request,mfCompanyId));
+			}
+		}
+		
+		@PostMapping("/addstocksinmf/{mfId}")
+		public ResponseEntity<?> addStocksInMf(@RequestBody Long stockId, @PathVariable Long mfId) {
+			{
+				System.out.println("addstocksinmf of mfId ");
+				return ResponseEntity.status(HttpStatus.CREATED).body(stockMfRelationService.addStocksInMf(stockId,mfId));
 			}
 		}
 }
