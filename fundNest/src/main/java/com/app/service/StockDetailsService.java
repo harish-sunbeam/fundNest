@@ -10,4 +10,6 @@ public interface StockDetailsService {
 	StockDetailsResponseDTO addStockDetails(StockDetailsRequestDTO request);
 
 	 List<StockDetailsResponseDTO> getStockDetails();
+	 
+	 StockDetailsResponseDTO updateStockDetails(StockDetailsRequestDTO request,Long stockId);
 }

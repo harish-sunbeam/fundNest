@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dao.StockDetailsDao;
 import com.app.dto.StockDetailsRequestDTO;
 import com.app.dto.StockDetailsResponseDTO;
@@ -31,7 +32,6 @@ public class StockDetailsServiceImpl implements StockDetailsService {
 		StockDetails stockDetails=new StockDetails();
 		
 		stockDetails.setStockChangeDate(date);
-		stockDetails.setStockDailyChange(request.getStockDailyChange());
 		stockDetails.setStockName(request.getStockName());
 		stockDetails.setStockPrice(request.getStockPrice());
 		stockDetails.setStockSector(request.getStockSector());
@@ -47,8 +47,8 @@ public class StockDetailsServiceImpl implements StockDetailsService {
 		List<StockDetailsResponseDTO> newStockDetails =new ArrayList<StockDetailsResponseDTO>();
 		for (StockDetails list : stockDetails) {
 			StockDetailsResponseDTO dto =new StockDetailsResponseDTO();
+			dto.setStockId(list.getStockId());
 			dto.setStockChangeDate(list.getStockChangeDate());
-			dto.setStockDailyChange(list.getStockDailyChange());
 			dto.setStockName(list.getStockName());
 			dto.setStockPrice(list.getStockPrice());
 			dto.setStockSector(list.getStockSector());
@@ -56,5 +56,15 @@ public class StockDetailsServiceImpl implements StockDetailsService {
 		}
 		return newStockDetails;
 	}
+	@Override
+	public StockDetailsResponseDTO updateStockDetails(StockDetailsRequestDTO request, Long stockId) {
+		StockDetails stockDetails=stockDetailsDao.findById(stockId)
+				.orElseThrow(()-> new ResourceNotFoundException("Invalid Stock Id from StockDetailsImpl"));
+		stockDetails.setStockPrice(request.getStockPrice());
+		stockDetails.setStockChangeDate(date);
+		return mapper.map(stockDetailsDao.save(stockDetails), StockDetailsResponseDTO.class);
+	}
+	
+	
 
 }

@@ -27,7 +27,6 @@ public class StockDetailsRequestDTO {
 	private String stockSector;
 	
 	
-	private double stockDailyChange;
 	
 
 }

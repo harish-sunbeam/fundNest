@@ -15,13 +15,13 @@ import lombok.ToString;
 @ToString
 public class StockDetailsResponseDTO {
 
+	private Long stockId;
+	
 	private String stockName;
 
 	private double stockPrice;
 
 	private String stockSector;
-
-	private double stockDailyChange;
 
 	private LocalDate stockChangeDate;
 }

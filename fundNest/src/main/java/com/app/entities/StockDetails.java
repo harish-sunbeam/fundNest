@@ -43,8 +43,6 @@ public class StockDetails {
 	@Column(name="stock_sector",length = 25,nullable = false)
 	private String stockSector;
 	
-	@Column(name="stock_daily_change")
-	private double stockDailyChange;
 	
 	@Column(name="stock_change_Date")
 	private LocalDate stockChangeDate;
