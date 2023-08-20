@@ -163,5 +163,16 @@ public class CustomerController {
 		
 	}
 	
+	@GetMapping("/kyc/{custId}")
+	public ResponseEntity<?> getCustomerKycDetails(@PathVariable Long custId)
+	{
+		System.out.println("In get Cust KYC Details"+ custId);
+		SignUpDetails cust=userService.getCustFromId(custId);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerKycDetails(cust));
+		
+	}
+	
+	
 	
 }
