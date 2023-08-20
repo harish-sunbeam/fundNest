@@ -30,7 +30,7 @@ public class MfDetailsController {
 	private MfDetailsService  mfDetailsService;
 	
 	// To get The List of stock Details By mutual Fund Id
-	@GetMapping("/{mutualFundId}")
+	@GetMapping("/getsockdetailsbymfid/{mutualFundId}")
 	public ResponseEntity<List<StockDetails>> getChildrenByParentId(@PathVariable Long mutualFundId) {
         List<StockDetails> children = stockMfRelationService.getStockDetailsByMfId(mutualFundId);
         return new ResponseEntity<>(children, HttpStatus.OK);

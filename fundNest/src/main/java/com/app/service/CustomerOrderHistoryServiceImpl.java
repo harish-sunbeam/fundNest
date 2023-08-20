@@ -55,7 +55,7 @@ public class CustomerOrderHistoryServiceImpl implements CustOrderHistoryService 
 			dto.setOrderStatus(custOrderList.getOrderStatus());
 			dto.setOrderTime(custOrderList.getOrderTime());
 			mfDetails.setMfName(custOrderList.getMfDetails().getMfName());
-			mfDetails.setMfNAV(custOrderList.getMfDetails().getMfNAV());
+			
 			
 			dto.setMfDetails(mfDetails);
 			newList.add(dto);		

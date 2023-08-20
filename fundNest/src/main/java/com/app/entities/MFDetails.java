@@ -39,8 +39,8 @@ public class MFDetails {
 	@JoinColumn(name="MF_company_id")
 	private MFCompanyDetails mfCompanyDetails;
 	
-//	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
-//	private List<StockDetails> stockDetails =new ArrayList<>();
+	@OneToOne(mappedBy = "mfDetails",cascade = CascadeType.ALL,orphanRemoval = true)
+	private ChangeInNav changeInNav;
 	
 	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
 	private List<UserPortfolio> userPortfolio =new ArrayList<>();
@@ -54,8 +54,7 @@ public class MFDetails {
 	@Column(name="mf_fund_size",nullable = false)
 	private double mfFundSize;
 	
-	@Column(name="mf_NAV",nullable = false)
-	private double mfNAV;
+	
 	
 	@Column(name="mf_total_units",nullable = false)
 	private double mfTotalUnits;
