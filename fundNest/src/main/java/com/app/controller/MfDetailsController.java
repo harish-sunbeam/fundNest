@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.AddStockInMfRequestDTO;
 import com.app.dto.MFDetailsRequestDTO;
 import com.app.entities.StockDetails;
 import com.app.service.MfDetailsService;
@@ -46,10 +47,10 @@ public class MfDetailsController {
 		}
 		
 		@PostMapping("/addstocksinmf/{mfId}")
-		public ResponseEntity<?> addStocksInMf(@RequestBody Long stockId, @PathVariable Long mfId) {
+		public ResponseEntity<?> addStocksInMf(AddStockInMfRequestDTO request) {
 			{
 				System.out.println("addstocksinmf of mfId ");
-				return ResponseEntity.status(HttpStatus.CREATED).body(stockMfRelationService.addStocksInMf(stockId,mfId));
+				return ResponseEntity.status(HttpStatus.CREATED).body(stockMfRelationService.addStocksInMf(request));
 			}
 		}
 }

@@ -33,7 +33,7 @@ public class MfDetailsServiceImpl implements MfDetailsService {
 		newMfDetails.setMfFundSize(mfDetails.getMfFundSize());
 		newMfDetails.setMfName(mfDetails.getMfName());
 		newMfDetails.setMfTotalUnits(mfDetails.getMfTotalUnits());
-		newMfDetails.setMfInvestmentInEachStock(mfDetails.getMfInvestmentInEachStock());
+		newMfDetails.setMfTotalInvestment(mfDetails.getMfTotalInvestment());
 		newMfDetails.setMfCompanyDetails(mfCompanyDetails);
 		
 		MFDetails  resMfDetails	=mfDetailsDao.save(mapper.map(newMfDetails, MFDetails.class));

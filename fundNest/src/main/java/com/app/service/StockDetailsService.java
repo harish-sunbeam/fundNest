@@ -11,5 +11,5 @@ public interface StockDetailsService {
 
 	 List<StockDetailsResponseDTO> getStockDetails();
 	 
-	 StockDetailsResponseDTO updateStockDetails(StockDetailsRequestDTO request,Long stockId);
+	
 }

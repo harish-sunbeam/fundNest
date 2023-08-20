@@ -59,7 +59,7 @@ public class MFDetails {
 	@Column(name="mf_total_units",nullable = false)
 	private double mfTotalUnits;
 	
-	@Column(name="mf_investment_in_each_stock",nullable = false)
-	private double mfInvestmentInEachStock;
+	@Column(name="mf_total_investment",nullable = false)
+	private double mfTotalInvestment;
 	
 }

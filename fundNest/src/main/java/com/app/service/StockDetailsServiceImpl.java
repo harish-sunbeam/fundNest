@@ -56,14 +56,7 @@ public class StockDetailsServiceImpl implements StockDetailsService {
 		}
 		return newStockDetails;
 	}
-	@Override
-	public StockDetailsResponseDTO updateStockDetails(StockDetailsRequestDTO request, Long stockId) {
-		StockDetails stockDetails=stockDetailsDao.findById(stockId)
-				.orElseThrow(()-> new ResourceNotFoundException("Invalid Stock Id from StockDetailsImpl"));
-		stockDetails.setStockPrice(request.getStockPrice());
-		stockDetails.setStockChangeDate(date);
-		return mapper.map(stockDetailsDao.save(stockDetails), StockDetailsResponseDTO.class);
-	}
+	
 	
 	
 

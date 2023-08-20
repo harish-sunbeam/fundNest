@@ -10,4 +10,6 @@ public interface StockMfRelationDao extends JpaRepository<StockMutualFundRelatio
 
 	List<StockMutualFundRelation> findByMfDetailsMfId(Long mfId);
 	
+	
+	
 }

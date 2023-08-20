@@ -1,6 +1,7 @@
 package com.app.entities;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,9 @@ import lombok.ToString;
 
 	    @ManyToOne
 	    private StockDetails stockDetails;
-
+	    
+	    @Column(name = "mf_investment_per_stock")
+	    private double mfInvestmentPerStock;
 	    
 	    // Other fields, getters, setters
 	}
