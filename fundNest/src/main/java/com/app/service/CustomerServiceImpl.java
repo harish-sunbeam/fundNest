@@ -103,7 +103,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		CustomerKYCDetails customerKYCDetails = new CustomerKYCDetails();
 		customerKYCDetails.setAccNo(request.getAccNo());
-		customerKYCDetails.setAnnualIncome(request.getAccNo());
+		customerKYCDetails.setAnnualIncome(request.getAnnualIncome());
 		customerKYCDetails.setBankName(request.getBankName());
 		customerKYCDetails.setIfscCode(request.getIfscCode());
 		customerKYCDetails.setSignUpDetails(signUpDetails);

@@ -77,7 +77,7 @@ public class CustomerController {
 	
 	// To add the customer KYC Details
 	@PostMapping("/addkyc/{custId}")
-	public ResponseEntity<?> addCustKYC(@RequestBody AddKYCDetailsRequestDTO request,Long custId) {
+	public ResponseEntity<?> addCustKYC(@RequestBody AddKYCDetailsRequestDTO request,@PathVariable Long custId) {
 		{
 			System.out.println("Add KYC of user " + request);
 			return ResponseEntity.status(HttpStatus.CREATED).body(custService.addCustKYC(request,custId));
