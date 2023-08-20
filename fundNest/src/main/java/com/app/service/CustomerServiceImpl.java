@@ -103,7 +103,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		CustomerKYCDetails customerKYCDetails = new CustomerKYCDetails();
 		customerKYCDetails.setAccNo(request.getAccNo());
-		customerKYCDetails.setAnnualIncome(request.getAccNo());
+		customerKYCDetails.setAnnualIncome(request.getAnnualIncome());
 		customerKYCDetails.setBankName(request.getBankName());
 		customerKYCDetails.setIfscCode(request.getIfscCode());
 		customerKYCDetails.setSignUpDetails(signUpDetails);
@@ -147,5 +147,12 @@ public class CustomerServiceImpl implements CustomerService {
 		CustomerNomineeDetails custDetails=custNomDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
 	
 		return mapper.map(custDetails,  AddNomineeResponseDTO.class);
+	}
+
+
+	@Override
+	public AddKYCDetailsResponseDTO getCustomerKycDetails(SignUpDetails request) {
+		CustomerKYCDetails custkycDetails= custKYCDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
+		return mapper.map(custkycDetails,  AddKYCDetailsResponseDTO.class);
 	}
 }

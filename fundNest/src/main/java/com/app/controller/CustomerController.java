@@ -77,7 +77,7 @@ public class CustomerController {
 	
 	// To add the customer KYC Details
 	@PostMapping("/addkyc/{custId}")
-	public ResponseEntity<?> addCustKYC(@RequestBody AddKYCDetailsRequestDTO request,Long custId) {
+	public ResponseEntity<?> addCustKYC(@RequestBody AddKYCDetailsRequestDTO request,@PathVariable Long custId) {
 		{
 			System.out.println("Add KYC of user " + request);
 			return ResponseEntity.status(HttpStatus.CREATED).body(custService.addCustKYC(request,custId));
@@ -162,6 +162,17 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerNomineeDetails(cust));
 		
 	}
+	
+	@GetMapping("/kyc/{custId}")
+	public ResponseEntity<?> getCustomerKycDetails(@PathVariable Long custId)
+	{
+		System.out.println("In get Cust KYC Details"+ custId);
+		SignUpDetails cust=userService.getCustFromId(custId);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerKycDetails(cust));
+		
+	}
+	
 	
 	
 }
