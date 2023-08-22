@@ -46,7 +46,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 	@Autowired
 	private ModelMapper mapper;
 
-	private MFDetails mfDetails;
+	//private MFDetails mfDetails;
 	
 	private LocalDate date = LocalDate.now();
 
@@ -55,8 +55,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 	// Get the List of the Stocks By Mutual Fund Id
 	public List<StockDetails> getStockDetailsByMfId(Long mfId) {
 		List<StockMutualFundRelation> relationList = stockMfRelationDao.findByMfDetailsMfId(mfId);
-		mfDetails =mfDetailsDao.findById(mfId)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid MF Id from StockDetailsImpl"));
+		
 		List<StockDetails> stockDetails = new ArrayList<>();
 
 		for (StockMutualFundRelation list : relationList) {
@@ -106,8 +105,8 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		double[] arrInvestmentInStock = new double[5];
 		ChangeInNav changeInNav = new ChangeInNav();
 		//Hibernate.initialize(MFDetails.class);
-		//MFDetails mfDetails = mfDetailsDao.findByMfId(mfId);
-				//.orElseThrow(() -> new ResourceNotFoundException("Invalid MF Id from StockDetailsImpl"));;
+		MFDetails mfDetails = mfDetailsDao.findById(mfId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid MF Id from StockDetailsImpl"));;
 				
 		double totalUnits = 0;
 		List<StockMutualFundRelation> stockMfRelation = stockMfRelationDao.findByMfDetailsMfId(mfId);
