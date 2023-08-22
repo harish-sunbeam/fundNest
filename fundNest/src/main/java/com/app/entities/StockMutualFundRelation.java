@@ -1,7 +1,10 @@
 package com.app.entities;
 
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,12 +30,16 @@ import lombok.ToString;
 	    private Long id;
 
 	    
-	    @ManyToOne
+	    @ManyToOne(fetch = FetchType.LAZY)
 	    private MFDetails mfDetails;
 
 	    @ManyToOne
 	    private StockDetails stockDetails;
-
 	    
+	    @Column(name = "mf_investment_per_stock")
+	    private double mfInvestmentPerStock;
+	    
+	    @Column(name="no_of_units_per_stock")
+	    private double noOfUnitsPerStock;
 	    // Other fields, getters, setters
 	}

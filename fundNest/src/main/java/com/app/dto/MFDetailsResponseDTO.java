@@ -26,5 +26,5 @@ public class MFDetailsResponseDTO {
 	private double mfTotalUnits;
 	
 	
-	private double mfInvestmentInEachStock;
+	private double mfTotalInvestment;
 }
