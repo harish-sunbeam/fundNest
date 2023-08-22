@@ -1,6 +1,8 @@
 package com.app.dto;
 
-import com.app.entities.MFCompanyDetails;
+import java.util.List;
+
+import com.app.entities.StockDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,17 +10,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+public class UpdateStockInMfRequestDTO {
 
-public class MFDetailsRequestDTO {
-
-	private String mfName;
+	private List<StockDetails> stockDetails;
 	
-	private double mfFundSize;
-
-	private double mfTotalInvestment;
+	
 }

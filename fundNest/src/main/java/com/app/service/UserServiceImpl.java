@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	// OTP Verification
 	public boolean verifyOTP(OTPVerificationDTO otpVerificationDTO) {
 		String storedOTP = otpMap.get(userObj.getEmailId());
-		otpMap=null;
+//		otpMap=null;
 		return storedOTP != null && storedOTP.equals(otpVerificationDTO.getOtp());
 	}
 
