@@ -30,7 +30,7 @@ import lombok.ToString;
 	    private Long id;
 
 	    
-	    @ManyToOne(fetch = FetchType.LAZY)
+	    @ManyToOne
 	    private MFDetails mfDetails;
 
 	    @ManyToOne
