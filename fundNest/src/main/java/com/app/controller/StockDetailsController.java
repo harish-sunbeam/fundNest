@@ -38,11 +38,5 @@ public class StockDetailsController {
 		}
 	}
 	
-	@PutMapping("/updatestockdetails/{stockId}")
-	public ResponseEntity<?> updateStockDetails(@RequestBody StockDetailsRequestDTO request,@PathVariable Long stockId) {
-		{
-			System.out.println("Update Stock details ");
-			return ResponseEntity.status(HttpStatus.CREATED).body(stockDetailsService.updateStockDetails(request,stockId));
-		}
-	}
+	
 }

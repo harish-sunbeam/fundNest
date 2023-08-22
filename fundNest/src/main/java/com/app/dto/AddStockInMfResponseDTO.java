@@ -1,6 +1,6 @@
 package com.app.dto;
 
-import com.app.entities.MFCompanyDetails;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,12 +13,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+public class AddStockInMfResponseDTO {
 
-public class MFDetailsRequestDTO {
+	private Long mfId;
 
-	private String mfName;
-	
-	private double mfFundSize;
+	private Long stockId;
 
-	private double mfTotalInvestment;
+	private double mfInvestmentPerStock;
+
 }
