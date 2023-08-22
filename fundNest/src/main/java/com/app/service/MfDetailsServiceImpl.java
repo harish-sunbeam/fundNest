@@ -39,4 +39,12 @@ public class MfDetailsServiceImpl implements MfDetailsService {
 		return mapper.map(resMfDetails, MFDetailsResponseDTO.class);
 	}
 
+	@Override
+	public MFDetails getMfDetailsByMfId(Long mfId) {
+		MFDetails mfDetails=mapper.map(mfDetailsDao.findById(mfId), MFDetails.class);
+		return mfDetails;
+	}
+	
+	
+
 }
