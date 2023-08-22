@@ -46,7 +46,7 @@ public class MfDetailsController {
 			}
 		}
 		
-		@PostMapping("/addstocksinmf/{mfId}")
+		@PostMapping("/addstocksinmfss")
 		public ResponseEntity<?> addStocksInMf(AddStockInMfRequestDTO request) {
 			{
 				System.out.println("addstocksinmf of mfId ");

@@ -17,7 +17,7 @@ import lombok.ToString;
 public class MFCompanyProfileRequestDTO {
 
 	
-	private Long MFCompanyId;
+
 	
 	private String companyName;
 	

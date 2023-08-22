@@ -46,15 +46,17 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 	@Autowired
 	private ModelMapper mapper;
 
+	private MFDetails mfDetails;
+	
 	private LocalDate date = LocalDate.now();
 
 	@Override
 	@Transactional
-
 	// Get the List of the Stocks By Mutual Fund Id
 	public List<StockDetails> getStockDetailsByMfId(Long mfId) {
 		List<StockMutualFundRelation> relationList = stockMfRelationDao.findByMfDetailsMfId(mfId);
-
+		mfDetails =mfDetailsDao.findById(mfId)
+				.orElseThrow(() -> new ResourceNotFoundException("Invalid MF Id from StockDetailsImpl"));
 		List<StockDetails> stockDetails = new ArrayList<>();
 
 		for (StockMutualFundRelation list : relationList) {
@@ -72,6 +74,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 	// Add stocks in respective mutual funds and Maintain there relationship in
 	// StockMfRealtion table
 	@Override
+	
 	public AddStockInMfResponseDTO addStocksInMf(AddStockInMfRequestDTO request) {
 
 		StockDetails stockDetails = stockDetailsDao.findById(request.getStockId())
@@ -79,10 +82,14 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		MFDetails mfDetails = mfDetailsDao.findById(request.getMfId())
 				.orElseThrow(() -> new ResourceNotFoundException("INvalid MfId From StockMFRelationImpl"));
 		StockMutualFundRelation stockMfRelation = new StockMutualFundRelation();
-
+		double invPerStock=request.getMfInvestmentPerStock();
+		double stockPrice=stockDetails.getStockPrice();
+		
+		double noOfUnitsPerStock=invPerStock/stockPrice;
 		stockMfRelation.setMfDetails(mfDetails);
 		stockMfRelation.setStockDetails(stockDetails);
 		stockMfRelation.setMfInvestmentPerStock(request.getMfInvestmentPerStock());
+		stockMfRelation.setNoOfUnitsPerStock(noOfUnitsPerStock);
 
 		AddStockInMfResponseDTO response = mapper.map(stockMfRelationDao.save(stockMfRelation),
 				AddStockInMfResponseDTO.class);
@@ -90,21 +97,33 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		return mapper.map(response, AddStockInMfResponseDTO.class);
 	}
 
+	//In this Method 
 	@Override
 	public String updateStockDetails(UpdateStockInMfRequestDTO request, Long mfId) {
 
+		List <StockDetails> saveAllList =new ArrayList<StockDetails>();
+		double[] arrNoOfUnitsPerStock = new double[5];
 		double[] arrInvestmentInStock = new double[5];
 		ChangeInNav changeInNav = new ChangeInNav();
-		MFDetails mfDetails = mfDetailsDao.findById(mfId)
-				.orElseThrow(() -> new ResourceNotFoundException("Invalid Mf Id from StockDetailsImpl"));
+		//Hibernate.initialize(MFDetails.class);
+		//MFDetails mfDetails = mfDetailsDao.findByMfId(mfId);
+				//.orElseThrow(() -> new ResourceNotFoundException("Invalid MF Id from StockDetailsImpl"));;
+				
+		double totalUnits = 0;
 		List<StockMutualFundRelation> stockMfRelation = stockMfRelationDao.findByMfDetailsMfId(mfId);
 
 		for (int i = 0; i < stockMfRelation.size(); i++) {
-			double investmentInStock = stockMfRelation.get(i).getMfInvestmentPerStock();
-			arrInvestmentInStock[i] = investmentInStock;
-
+			double noOfUnitsPerStock = stockMfRelation.get(i).getNoOfUnitsPerStock();
+			arrNoOfUnitsPerStock[i] = noOfUnitsPerStock;
+			totalUnits=totalUnits +noOfUnitsPerStock;
 		}
-		double totalUnits = 0;
+		
+		for (int i = 0; i < stockMfRelation.size(); i++) {
+			double invPerStock = stockMfRelation.get(i).getMfInvestmentPerStock();
+			arrInvestmentInStock[i] = invPerStock;
+			
+		}
+		
 		double totalInvestment = 0;
 		for (int i = 0; i < request.getStockDetails().size(); i++) {
 
@@ -112,16 +131,16 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 					.orElseThrow(() -> new ResourceNotFoundException("Invalid Stock Id from StockDetailsImpl"));
 			stockDetails.setStockPrice(request.getStockDetails().get(i).getStockPrice());
 			stockDetails.setStockChangeDate(date);
-			mapper.map(stockDetailsDao.save(stockDetails), StockDetails.class);
+			saveAllList.add(stockDetails);
 			double newStockPrice = request.getStockDetails().get(i).getStockPrice();
-			double investmentInStock = arrInvestmentInStock[i];
+			//double investmentInStock = arrInvestmentInStock[i];
 
-			double units = investmentInStock / newStockPrice;
-			totalUnits = totalUnits + units;
-			totalInvestment = totalInvestment + investmentInStock;
+			arrInvestmentInStock[i] = newStockPrice * arrNoOfUnitsPerStock[i] ;
+			
+			totalInvestment = totalInvestment + arrInvestmentInStock[i];
 
 		}
-
+		mapper.map(stockDetailsDao.saveAll(saveAllList), StockDetails.class);
 		double liabilities = (3 * totalInvestment) / 100;
 
 		double NAV = (totalInvestment - liabilities) / totalUnits;

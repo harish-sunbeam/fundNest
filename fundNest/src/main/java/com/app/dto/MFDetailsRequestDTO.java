@@ -18,16 +18,7 @@ public class MFDetailsRequestDTO {
 
 	private String mfName;
 	
-	
-	
 	private double mfFundSize;
-	
-	
-	private double mfNAV;
-	
-	
-	private double mfTotalUnits;
-	
-	
+
 	private double mfTotalInvestment;
 }

@@ -32,7 +32,6 @@ public class MfDetailsServiceImpl implements MfDetailsService {
 		MFDetails newMfDetails=new MFDetails();
 		newMfDetails.setMfFundSize(mfDetails.getMfFundSize());
 		newMfDetails.setMfName(mfDetails.getMfName());
-		newMfDetails.setMfTotalUnits(mfDetails.getMfTotalUnits());
 		newMfDetails.setMfTotalInvestment(mfDetails.getMfTotalInvestment());
 		newMfDetails.setMfCompanyDetails(mfCompanyDetails);
 		
