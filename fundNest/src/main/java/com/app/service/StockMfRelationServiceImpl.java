@@ -133,11 +133,11 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 			stockDetails.setStockChangeDate(date);
 			saveAllList.add(stockDetails);
 			double newStockPrice = request.getStockDetails().get(i).getStockPrice();
-			//double investmentInStock = arrInvestmentInStock[i];
+			double investmentInStock = arrInvestmentInStock[i];
 
 			arrInvestmentInStock[i] = newStockPrice * arrNoOfUnitsPerStock[i] ;
 			
-			totalInvestment = totalInvestment + arrInvestmentInStock[i];
+			totalInvestment = totalInvestment +investmentInStock ;
 
 		}
 		mapper.map(stockDetailsDao.saveAll(saveAllList), StockDetails.class);
