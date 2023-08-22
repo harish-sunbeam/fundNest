@@ -53,4 +53,10 @@ public class MfDetailsController {
 				return ResponseEntity.status(HttpStatus.CREATED).body(stockMfRelationService.addStocksInMf(request));
 			}
 		}
+		//get MfDetails by MfId for UpdateStockValue and Further Calculations
+		@GetMapping("/getmfdetailsbymfid/{mutualFundId}")
+		public ResponseEntity<?> getMfDetailaisByMfId(@PathVariable Long mutualFundId) {
+	       
+	        return ResponseEntity.status(HttpStatus.CREATED).body(mfDetailsService.getMfDetailsByMfId(mutualFundId));
+	    }
 }
