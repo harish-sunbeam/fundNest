@@ -7,7 +7,7 @@ import com.app.entities.CustomerNomineeDetails;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.CustomerOrderHistory;
 import com.app.entities.MFCompanyDetails;
-import com.app.entities.UserPortfolio;
+import com.app.entities.UserInvestmentDetails;
 import com.app.entities.UserType;
 
 import lombok.AllArgsConstructor;

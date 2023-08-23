@@ -45,8 +45,8 @@ public class MFDetails {
 	@OneToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
 	private List<ChangeInNav> changeInNav=new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-	private List<UserPortfolio> userPortfolio =new ArrayList<>();
+	@OneToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL)
+	private List<UserInvestmentDetails> userInvestmentDetails =new ArrayList<>();
 	
 	@OneToMany(mappedBy = "mfDetails",cascade = CascadeType.ALL,orphanRemoval = true  ,fetch = FetchType.LAZY)
 	private List<CustomerOrderHistory> customerOrderHistory =new ArrayList<>();

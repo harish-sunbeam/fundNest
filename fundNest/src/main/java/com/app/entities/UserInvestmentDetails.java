@@ -1,6 +1,7 @@
 package com.app.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,39 +32,39 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="user_portfolio")
-public class UserPortfolio {
+@Table(name="user_investment_details")
+public class UserInvestmentDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long custPortfolioId;
+	private Long userInvestmentId;
 	
 	@ManyToOne
 	@JoinColumn(name="cust_id")
 	private SignUpDetails signUpDetails;
 	
-	@ManyToMany
-	@JoinTable(name="mf_details_user_portfolio",joinColumns = @JoinColumn(name="mf_id")
-	,inverseJoinColumns = @JoinColumn(name="cust_portfolio_id"))
-	private List<MFDetails> mfDetails=new ArrayList<>();
 	
-	@OneToOne(mappedBy = "userPortfolio",cascade = CascadeType.ALL,orphanRemoval = true)
-	private CustomerOrderHistory custWalletTransaction;	
+	@ManyToOne
+	@JoinColumn(name = "mf_id")
+	private MFDetails mfDetails; 
 	
-	@Column(name="sip_ammount",nullable = false)
-	private double sipAmmount;
+	@OneToMany(mappedBy = "userInvestmentDetails",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<CustomerOrderHistory> custWalletTransaction;	
+	
+	@Column(name="investment_ammount")
+	private double investmentAmmount;
 	
 	@Column
 	private double units;
 	
-	@Column(name="one_time_ammount",nullable = false)
-	private double oneTimeAmmount;
+	@Column(name="p_and_l")
+	private double pAndl;
 	
-	@Column(name="sip_date",nullable = false)
-	private LocalDate sipDate;
 	
-	@Column(name="one_time_date",nullable = false)
-	private LocalDate oneTimeDate;
+	@Column(name="investment_date")
+	private LocalDateTime investmentDate;
+	
+	
 	
 	
 	

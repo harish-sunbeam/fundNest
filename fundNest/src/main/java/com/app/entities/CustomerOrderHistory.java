@@ -38,30 +38,27 @@ public class CustomerOrderHistory{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long custOrderNo;
 	
-	@ManyToOne
-	@JoinColumn(name = "cust_transac_history_id")
-	private CustomerTransacHistory custTransacHistory;
 	
 	@ManyToOne(targetEntity = SignUpDetails.class,fetch= FetchType.EAGER)
 	@JoinColumn(name="cust_id")
 	private SignUpDetails signUpDetails;
 	
-	@ManyToOne(targetEntity = MFDetails.class,fetch= FetchType.EAGER)
+	@ManyToOne(targetEntity = MFDetails.class)
 	@JoinColumn(name="mf_id")
 	private MFDetails mfDetails;
 	
-	@OneToOne(targetEntity =UserPortfolio.class,fetch= FetchType.LAZY)
-	@JoinColumn(name = "cust_portfolio_id")
-	private UserPortfolio userPortfolio;
+	@ManyToOne(targetEntity =UserInvestmentDetails.class)
+	@JoinColumn(name = "user_investment_details")
+	private UserInvestmentDetails userInvestmentDetails;
 	
-	@Column(name="order_status",length = 20,nullable = false)
+	@Column(name="order_status",length = 20)
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 	
-	@Column(name="order_time",nullable =false)
+	@Column(name="order_time")
 	private LocalDateTime orderTime;
 	
-	@Column(name="order_ammount",nullable = false)
+	@Column(name="order_ammount")
 	private double orderAmmount;
 	
 

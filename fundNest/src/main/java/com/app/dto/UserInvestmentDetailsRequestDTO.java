@@ -1,6 +1,7 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +14,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserPortfolioRequestDTO {
-
-	private double sipAmmount;
-
-	private double oneTimeAmmount;
-
-	private LocalDate sipDate;
-
-	private LocalDate oneTimeDate;
+public class UserInvestmentDetailsRequestDTO {
+	private double orderAmmount;
+	private Long mfId;
+	
+	
 }

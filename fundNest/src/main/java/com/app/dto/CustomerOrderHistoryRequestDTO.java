@@ -18,7 +18,7 @@ import com.app.entities.CustomerTransacHistory;
 import com.app.entities.MFDetails;
 import com.app.entities.OrderStatus;
 import com.app.entities.SignUpDetails;
-import com.app.entities.UserPortfolio;
+import com.app.entities.UserInvestmentDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

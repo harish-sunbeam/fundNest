@@ -1,6 +1,7 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserPortfolioResponseDTO {
+public class UserInvestmentDetailsResponseDTO {
 
-	private double sipAmmount;
+	private double investmentAmmount;
+
+	private LocalDateTime investmentDate;
+
 }

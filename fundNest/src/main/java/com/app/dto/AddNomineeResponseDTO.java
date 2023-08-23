@@ -37,7 +37,7 @@ public class AddNomineeResponseDTO {
 	private String nomState;
 	
 	
-	private int nomPinCode;
+	private String nomPinCode;
 	
 	
 	private LocalDate nomDOB;

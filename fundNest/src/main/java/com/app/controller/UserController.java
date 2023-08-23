@@ -50,6 +50,7 @@ public class UserController {
         userObj=userRegistrationDTO;
         flag=1;
 		userService.sendOTPAndStoreUserData(userRegistrationDTO);
+		
         return ResponseEntity.ok("OTP sent for verification.");
     }
 
@@ -59,6 +60,7 @@ public class UserController {
         boolean isVerified = userService.verifyOTP(otpVerificationDTO);
         if (isVerified) {
             userService.storeUserData(userObj,flag);
+            flag=0;
             return ResponseEntity.ok("User registered successfully.");
         } else {
             return ResponseEntity.badRequest().body("OTP verification failed.");

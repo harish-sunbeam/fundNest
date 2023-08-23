@@ -32,7 +32,7 @@ public class AddNomineeRequestDTO {
 
 	private String nomState;
 
-	private int nomPinCode;
+	private String nomPinCode;
 
 	private LocalDate nomDOB;
 }
