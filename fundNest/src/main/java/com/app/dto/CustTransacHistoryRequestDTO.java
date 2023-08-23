@@ -19,13 +19,6 @@ import lombok.ToString;
 @ToString
 public class CustTransacHistoryRequestDTO {
 
-	private String transactionStatus;
-
 	private double transactionAmmount;
 
-	private LocalDateTime transactionTime;
-
-	private double openingBalance;
-
-	private double totalInvestedAmmount;
 }

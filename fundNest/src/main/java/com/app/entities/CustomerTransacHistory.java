@@ -9,6 +9,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,23 +42,19 @@ public class CustomerTransacHistory {
 	@ManyToOne(targetEntity = SignUpDetails.class,fetch= FetchType.EAGER)
 	@JoinColumn(name="cust_id")
 	private SignUpDetails signUpDetails;
+
+	@Column(name="transaction_status",length = 12)
+	@Enumerated(EnumType.STRING)
+	private TransactionStatus transactionStatus;
 	
-	 @OneToMany(mappedBy = "custTransacHistory", cascade = CascadeType.ALL, orphanRemoval = true)
-	    private List<CustomerOrderHistory> orderHistoryList = new ArrayList<>();
-	
-	
-	@Column(name="transaction_status",length = 12,nullable = false)
-	private String transactionStatus;
-	
-	@Column(name="transaction_ammount",nullable = false)
+	@Column(name="transaction_ammount")
 	private double transactionAmmount;
 	
-	@Column(name="transaction_time",nullable =false)
+	@Column(name="transaction_time")
 	private LocalDateTime transactionTime;
 	
-	@Column(name="opening_balance",nullable = false)
+	@Column(name="opening_balance")
 	private double openingBalance;
 	
-	@Column(name="total_invested_ammount",nullable = false)
-	private double totalInvestedAmmount;
+	
 }

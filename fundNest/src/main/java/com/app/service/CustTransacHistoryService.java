@@ -9,7 +9,9 @@ import com.app.entities.CustomerTransacHistory;
 public interface CustTransacHistoryService {
 
 	
-	CustTransacHistoryResponseDTO addTransacHistory(CustTransacHistoryRequestDTO request,Long custId);
+	CustTransacHistoryResponseDTO deposit(CustTransacHistoryRequestDTO request,Long custId);
 	 
 	 List<CustTransacHistoryResponseDTO> getCustTHByCustId(Long custId);
+	 
+	 CustTransacHistoryResponseDTO withdraw(CustTransacHistoryRequestDTO  request,Long custId);
 }

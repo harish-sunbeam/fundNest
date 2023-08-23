@@ -29,5 +29,5 @@ public class MFCompanyProfileRequestDTO {
 	
 	private String companySate;
 	
-	private int companyPinCode;
+	private String companyPinCode;
 }
