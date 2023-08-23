@@ -23,7 +23,7 @@ import com.app.dto.CustTransacHistoryResponseDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.CustomerOrderHistoryResponseDTO;
-import com.app.dto.UserPortfolioRequestDTO;
+import com.app.dto.UserInvestmentDetailsRequestDTO;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
@@ -32,7 +32,7 @@ import com.app.service.CustOrderHistoryService;
 import com.app.service.CustTransacHistoryService;
 import com.app.service.CustomerService;
 
-import com.app.service.UserPortfolioService;
+import com.app.service.UserInvestmentDetailsService;
 import com.app.service.UserService;
 
 @RestController
@@ -47,7 +47,7 @@ public class CustomerController {
 	private UserService userService;
 	
 	@Autowired
-	private UserPortfolioService userPortfolioService;
+	private UserInvestmentDetailsService userPortfolioService;
 	
 	@Autowired
 	private CustOrderHistoryService custOrderHistoryService;
@@ -85,11 +85,20 @@ public class CustomerController {
 	}
 	
 	// To add the customer Portfolio Details
-	@PostMapping("/portfolio")
-	public ResponseEntity<?> addInPortfolio(@RequestBody UserPortfolioRequestDTO request) {
+	@PostMapping("/buymutualfund/{custId}")
+	public ResponseEntity<?> addInPortfolio(@RequestBody UserInvestmentDetailsRequestDTO request,@PathVariable Long custId) {
 		{
 			System.out.println("Add in portfolio of user " + request);
-			return ResponseEntity.status(HttpStatus.CREATED).body(userPortfolioService.addInPortfolio(request));
+			return ResponseEntity.status(HttpStatus.CREATED).body(userPortfolioService.buyMfAddInUserInvestment(request,custId));
+		}
+	}
+	
+	//to sell mf and adjust the units and balance etc.
+	@PostMapping("/sellmutualfund/{custId}")
+	public ResponseEntity<?> sellMf(@RequestBody UserInvestmentDetailsRequestDTO request,@PathVariable Long custId) {
+		{
+			System.out.println("Sell mf of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(userPortfolioService.sellMfRemoveFromUserInvestment(request,custId));
 		}
 	}
 	
@@ -125,11 +134,19 @@ public class CustomerController {
 	}
 	
 	// To add the customer Transaction Into the database
-	@PostMapping("/addtransactionhistory/{custId}")
-	public ResponseEntity<?> addTransacHistory(@RequestBody CustTransacHistoryRequestDTO request,Long custId) {
+	@PostMapping("/deposit/{custId}")
+	public ResponseEntity<?> deposit(@RequestBody CustTransacHistoryRequestDTO request,@PathVariable Long custId) {
 		{
-			System.out.println("Add Transac History of user " + request);
-			return ResponseEntity.status(HttpStatus.CREATED).body(custTransacHistoryService.addTransacHistory(request,custId));
+			System.out.println("Deposit of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(custTransacHistoryService.deposit(request,custId));
+		}
+	}
+	
+	@PostMapping("/withdraw/{custId}")
+	public ResponseEntity<?> withdraw(@RequestBody CustTransacHistoryRequestDTO request,@PathVariable Long custId) {
+		{
+			System.out.println("Withdraw of user " + request);
+			return ResponseEntity.status(HttpStatus.CREATED).body(custTransacHistoryService.withdraw(request, custId));
 		}
 	}
 	

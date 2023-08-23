@@ -62,7 +62,7 @@ public class CustomerPersonalDetails {
 	private String custState;
 	
 	@Column(name="cust_pin_code",length=6,nullable = false)
-	private int custPinCode;
+	private String custPinCode;
 	
 	@Column(name="cust_DOB",nullable = false)
 	private LocalDate custDOB;

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.app.entities.TransactionStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,7 @@ import lombok.ToString;
 @ToString
 public class CustTransacHistoryResponseDTO {
 
-	private String transactionStatus;
+	private TransactionStatus transactionStatus;
 
 	private double transactionAmmount;
 

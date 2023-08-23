@@ -31,7 +31,7 @@ public class CustomerUpdateProfileResponseDTO {
 
 	private String custState;
 
-	private int custPinCode;
+	private String custPinCode;
 
 	
 

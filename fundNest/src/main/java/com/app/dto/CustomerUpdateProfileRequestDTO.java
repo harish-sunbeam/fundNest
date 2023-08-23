@@ -31,6 +31,6 @@ public class CustomerUpdateProfileRequestDTO {
 
 	private String custState;
 
-	private int custPinCode;
+	private String custPinCode;
 
 }
