@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.app.entities.CustomerKYCDetails;
 import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
 
@@ -16,4 +17,7 @@ public interface CustTransacHistoryDao extends JpaRepository<CustomerTransacHist
 	List<CustomerTransacHistory> findBySignUpDetailsCustIdOrderByCustTransacHistoryIdDesc(Long custId);
 	
 	//List<CustomerTransacHistory> findBySignUpDetailsCustIdOrderByTransactionTime(Long custId);
+
+	CustomerTransacHistory findBySignUpDetails(SignUpDetails signUpDetails);
+
 }
