@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dao.CustTransacHistoryDao;
 import com.app.dao.CustomerKYCDetailsDao;
 import com.app.dao.CustomerNomineeDetailsDao;
 import com.app.dao.CustomerPersonalDetailsDao;
@@ -16,6 +17,7 @@ import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddNomineeResponseDTO;
 import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.AddProfileResponseDTO;
+import com.app.dto.CustTransacHistoryResponseDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerUpdateProfileResponseDTO;
 import com.app.dto.LogInRequestDTO;
@@ -23,6 +25,7 @@ import com.app.dto.LogInResponseDTO;
 import com.app.entities.CustomerKYCDetails;
 import com.app.entities.CustomerNomineeDetails;
 import com.app.entities.CustomerPersonalDetails;
+import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
 
 @Service
@@ -40,6 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerKYCDetailsDao custKYCDetailsDao;
+	
+	@Autowired
+	private CustTransacHistoryDao custTransacHistoryDao;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -154,5 +160,14 @@ public class CustomerServiceImpl implements CustomerService {
 	public AddKYCDetailsResponseDTO getCustomerKycDetails(SignUpDetails request) {
 		CustomerKYCDetails custkycDetails= custKYCDetailsDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
 		return mapper.map(custkycDetails,  AddKYCDetailsResponseDTO.class);
+	}
+
+
+	@Override
+	public CustTransacHistoryResponseDTO getTransactionDetails(SignUpDetails request) {
+		// TODO Auto-generated method stub
+		CustomerTransacHistory  customerTransacHistory = custTransacHistoryDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
+		return mapper.map(customerTransacHistory, CustTransacHistoryResponseDTO.class);
+	
 	}
 }
