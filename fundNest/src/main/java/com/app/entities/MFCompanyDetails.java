@@ -52,6 +52,6 @@ public class MFCompanyDetails {
 	private String companySate;
 	
 	@Column(name="company_pin_code",length = 6,nullable = false)
-	private int companyPinCode;
+	private String companyPinCode;
 	
 }

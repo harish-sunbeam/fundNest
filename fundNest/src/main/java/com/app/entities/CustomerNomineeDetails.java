@@ -58,7 +58,7 @@ public class CustomerNomineeDetails {
 	private String nomState;
 	
 	@Column(name="nom_pin_code",length = 6,nullable = false)
-	private int nomPinCode;
+	private String nomPinCode;
 	
 	@Column(name="nom_DOB",nullable = false)
 	private LocalDate nomDOB;

@@ -34,7 +34,7 @@ public class AddProfileRequestDTO {
 
 	private String custState;
 
-	private int custPinCode;
+	private String custPinCode;
 
 	private LocalDate custDOB;
 }

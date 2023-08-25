@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.AddStockInMfRequestDTO;
+import com.app.dto.AddStockInMfResponseDTO;
 import com.app.dto.MFDetailsRequestDTO;
+import com.app.dto.UpdateStockInMfRequestDTO;
 import com.app.entities.StockDetails;
 import com.app.service.MfDetailsService;
 import com.app.service.StockMfRelationService;
@@ -24,6 +26,7 @@ import com.app.service.StockMfRelationService;
 @CrossOrigin(origins = "http://localhost:3000")
 public class MfDetailsController {
 
+	int counter=0;
 	@Autowired
 	private StockMfRelationService stockMfRelationService;
 
@@ -46,11 +49,22 @@ public class MfDetailsController {
 			}
 		}
 		
-		@PostMapping("/addstocksinmfss")
-		public ResponseEntity<?> addStocksInMf(AddStockInMfRequestDTO request) {
+		@PostMapping("/addstocksinmfs")
+		public ResponseEntity<?> addStocksInMf(@RequestBody AddStockInMfRequestDTO request) {
 			{
 				System.out.println("addstocksinmf of mfId ");
-				return ResponseEntity.status(HttpStatus.CREATED).body(stockMfRelationService.addStocksInMf(request));
+				AddStockInMfResponseDTO response=stockMfRelationService.addStocksInMf(request);
+				counter++;
+				if(counter==5)
+				{
+					List<StockDetails> stockList=stockMfRelationService.getStockDetailsByMfId(request.getMfId());
+					
+					UpdateStockInMfRequestDTO list=new UpdateStockInMfRequestDTO(stockList);
+					
+					stockMfRelationService.updateStockDetails(list, request.getMfId());
+					counter=0;
+				}
+				return ResponseEntity.status(HttpStatus.CREATED).body(response);
 			}
 		}
 		//get MfDetails by MfId for UpdateStockValue and Further Calculations

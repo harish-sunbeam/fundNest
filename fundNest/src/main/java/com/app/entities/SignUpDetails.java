@@ -51,7 +51,7 @@ public class SignUpDetails  {
 	private List<CustomerTransacHistory> customerTransacHistory =new ArrayList<>();
 	
 	@OneToMany(mappedBy = "signUpDetails",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<UserPortfolio> userPortfolio =new ArrayList<>();
+	private List<UserInvestmentDetails> userPortfolio =new ArrayList<>();
 	
 	
 	@OneToOne(mappedBy ="signUpDetails",cascade =CascadeType.ALL,orphanRemoval = true )
