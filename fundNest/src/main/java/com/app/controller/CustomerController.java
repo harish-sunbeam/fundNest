@@ -150,6 +150,16 @@ public class CustomerController {
 		}
 	}
 	
+	// To retrieve the investment details
+		@GetMapping("/transactiondetails/{custId}")
+		public ResponseEntity<?> getTransactionDetails(@PathVariable Long custId)
+		{
+			System.out.println("In get Transac Details"+ custId);
+			SignUpDetails cust=userService.getCustFromId(custId);
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body(custService.getTransactionDetails(cust));
+			
+		}
 
 	// Get the Overall Transaction History
 	@GetMapping("/gettransactionhistory/{custId}")
