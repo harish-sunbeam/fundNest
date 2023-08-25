@@ -1,6 +1,6 @@
 package com.app.dto;
 
-import javax.persistence.Id;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

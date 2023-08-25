@@ -12,6 +12,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MFProfileCompanyResponseDTO {
-	
+
 	private Long MFCompanyId;
+	private String companyName;
+
+	private String companyEmailId;
+
+	private String companyContactNo;
+
+	private String companyAddress;
+
+	private String companySate;
+
+	private String companyPinCode;
 }
