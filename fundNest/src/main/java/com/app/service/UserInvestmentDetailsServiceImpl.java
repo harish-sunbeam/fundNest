@@ -163,6 +163,7 @@ public class UserInvestmentDetailsServiceImpl implements UserInvestmentDetailsSe
 		return mapper.map(toReturnUserInv, UserInvestmentDetailsResponseDTO.class);
 	}
 
+	// sell
 	@Override
 	public UserInvestmentDetailsResponseDTO sellMfRemoveFromUserInvestment(UserInvestmentDetailsRequestDTO request,
 			Long custId) {

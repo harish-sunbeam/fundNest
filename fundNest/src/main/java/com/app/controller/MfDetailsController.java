@@ -17,7 +17,9 @@ import com.app.dto.AddStockInMfRequestDTO;
 import com.app.dto.AddStockInMfResponseDTO;
 import com.app.dto.MFDetailsRequestDTO;
 import com.app.dto.UpdateStockInMfRequestDTO;
+import com.app.entities.ChangeInNav;
 import com.app.entities.StockDetails;
+import com.app.service.ChangeInNavService;
 import com.app.service.MfDetailsService;
 import com.app.service.StockMfRelationService;
 
@@ -29,6 +31,9 @@ public class MfDetailsController {
 	int counter=0;
 	@Autowired
 	private StockMfRelationService stockMfRelationService;
+	
+	@Autowired
+	private ChangeInNavService changeInNavService;
 
 	@Autowired
 	private MfDetailsService  mfDetailsService;
@@ -73,4 +78,11 @@ public class MfDetailsController {
 	       
 	        return ResponseEntity.status(HttpStatus.CREATED).body(mfDetailsService.getMfDetailsByMfId(mutualFundId));
 	    }
+		
+		//get nav List
+				@GetMapping("/getnavbymfid/{mutualFundId}")
+				public ResponseEntity<?> getNavByMfId(@PathVariable Long mutualFundId,int noOfDays) {
+			        return ResponseEntity.status(HttpStatus.CREATED).body(changeInNavService.getChangeInNavByMfId(mutualFundId,noOfDays));
+			    }
+				
 }

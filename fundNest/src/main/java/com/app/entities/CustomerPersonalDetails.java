@@ -67,5 +67,8 @@ public class CustomerPersonalDetails {
 	@Column(name="cust_DOB",nullable = false)
 	private LocalDate custDOB;
 	
+	@Column(name="url_of_image",length=1024)
+	private String urlOfImage;
+	
 	
 }
