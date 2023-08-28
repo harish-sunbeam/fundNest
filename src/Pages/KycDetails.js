@@ -1,9 +1,83 @@
-import React from "react";
 import dp from "../Assets/images/profile.jpg";
 import "../CSS/profile.css";
-import { pad } from "crypto-js";
+// import { pad } from "crypto-js";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function KycDetails() {
+
+  const custId = window.localStorage.getItem('custID');
+  
+
+  const [kyc, setKyc] = useState({
+    bankName: "",
+    accNo: "",
+    ifscCode: "",
+    annualIncome: "",
+  });
+
+  const { bankName, accNo, ifscCode, annualIncome } = kyc;
+
+  const onInputChange = (e) => {
+    setKyc({ ...kyc, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const onSubmit = async (e) => {
+debugger
+    const kycDetail = {
+      bankName: kyc.bankName,
+      accNo: kyc.accNo,
+      ifscCode: kyc.ifscCode,
+      annualIncome: kyc.annualIncome
+    }
+
+    e.preventDefault();
+    await axios.post(`http://localhost:8080/customer/addkyc/${custId}`, kycDetail);
+  };
+
+
+  const loadUser = async () => {
+    debugger
+    try {
+      const response = await axios.get(`http://localhost:8080/customer/kyc/${custId}`);
+      
+      if (response.status === 200 || response.status === 201 ) {
+        setKyc(response.data);
+      } else {
+        setKyc(
+          {
+            bankName: "",
+            accNo: "",
+            ifscCode: "",
+            annualIncome: ""
+          }
+          );
+      }
+    } catch (error) {
+      
+      setKyc(
+        {
+          bankName: "",
+          accNo: "",
+          ifscCode: "",
+          annualIncome: ""
+        }
+        );
+    }
+  };
+  
+
+//{ below is backup code in above code I am going to make changes using response.status=500}
+  // const loadUser = async () => {
+  //   const result = await axios.get(`http://localhost:8080/customer/kyc/${custId}`);
+  //   debugger
+  //   setKyc(result.data);
+  // };
+
   return (
     <section class="py-5 my-5">
     <div class="container">
@@ -26,7 +100,7 @@ function KycDetails() {
             role="tablist"
             aria-orientation="vertical"
           >
-            <a
+            <a 
               class="nav-link"
               id="add profile-tab"
               data-toggle="pill"
@@ -101,25 +175,61 @@ function KycDetails() {
                         <div class="col-md-6">
                             <div class="form-group">
                                   <h6>Bank Name </h6>
-                                  <input type="text" class="form-control" />
+                                  {/* <input type="text" class="form-control" /> */}
+                                  <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Enter your Bank name"
+                                    name="bankName"
+                                    value={bankName}
+                                    onChange={(e) => onInputChange(e)}
+                                    readOnly={bankName !== ''}
+                                  />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <h6>Account Number</h6>
-                                  <input type="text" class="form-control" />
+                                  {/* <input type="text" class="form-control" /> */}
+                                  <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Enter your Bank Account No."
+                                    name="accNo"
+                                    value={accNo}
+                                    onChange={(e) => onInputChange(e)}
+                                    readOnly={accNo !== ''}
+                                  />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <h6>IFSC Code</h6>
-                                  <input type="text" class="form-control" />
+                                  {/* <input type="text" class="form-control" /> */}
+                                  <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Enter IFSC code"
+                                    name="ifscCode"
+                                    value={ifscCode}
+                                    onChange={(e) => onInputChange(e)}
+                                    readOnly={ifscCode !== ''}
+                                  />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                   <h6>Annual Income </h6>
-                                  <input type="text" class="form-control" />
+                                  {/* <input type="text" class="form-control" /> */}
+                                  <input
+                                    type={"text"}
+                                    className="form-control"
+                                    placeholder="Enter your Annual Income"
+                                    name="annualIncome"
+                                    value={annualIncome}
+                                    onChange={(e) => onInputChange(e)}
+                                    readOnly={annualIncome !== ''}
+                                  />
                             </div>
                         </div>
 
@@ -145,8 +255,8 @@ function KycDetails() {
 
                     <div>
                         <button class="btn btn-
-                primary btns">Update & Save</button>
-                        <button class="btn btn-light" style={{marginLeft:"20px"}}>Cancel</button>
+                primary btns" onClick={onSubmit}>Update & Save</button>
+                        {/* <button class="btn btn-light" style={{marginLeft:"20px"}}>Cancel</button> */}
                     </div>
                 </div>
                 {/* end of the right side div */}
@@ -163,10 +273,3 @@ function KycDetails() {
 }
 
 export default KycDetails
-
-
-
-
-
-
-

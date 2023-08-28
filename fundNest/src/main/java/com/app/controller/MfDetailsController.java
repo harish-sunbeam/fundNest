@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.AddStockInMfRequestDTO;
 import com.app.dto.AddStockInMfResponseDTO;
 import com.app.dto.MFDetailsRequestDTO;
+import com.app.dto.MFDetailsResponseDTO;
 import com.app.dto.UpdateStockInMfRequestDTO;
 import com.app.entities.ChangeInNav;
+import com.app.entities.MFDetails;
 import com.app.entities.StockDetails;
 import com.app.service.ChangeInNavService;
 import com.app.service.MfDetailsService;
@@ -79,10 +81,18 @@ public class MfDetailsController {
 	        return ResponseEntity.status(HttpStatus.CREATED).body(mfDetailsService.getMfDetailsByMfId(mutualFundId));
 	    }
 		
+
 		//get nav List
 				@GetMapping("/getnavbymfid/{mutualFundId}")
 				public ResponseEntity<?> getNavByMfId(@PathVariable Long mutualFundId,int noOfDays) {
 			        return ResponseEntity.status(HttpStatus.CREATED).body(changeInNavService.getChangeInNavByMfId(mutualFundId,noOfDays));
 			    }
 				
+
+		@GetMapping("/getlistofallmf")
+		public ResponseEntity<List<MFDetailsResponseDTO>> getListOfAllMf() {
+	        List<MFDetailsResponseDTO> children = mfDetailsService.getListOfAllMf();
+	        return new ResponseEntity<>(children, HttpStatus.OK);
+	    }
+
 }

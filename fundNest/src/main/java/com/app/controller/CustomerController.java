@@ -198,6 +198,7 @@ public class CustomerController {
 		
 	}
 	
+
 	
 	// To retrieve the Customer Investment details
 	@GetMapping("/getCustomerInvestmentDetails/{custId}")
@@ -208,4 +209,5 @@ public class CustomerController {
 	
 	
 	
+
 }

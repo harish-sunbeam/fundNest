@@ -1,0 +1,28 @@
+.stockDetailsText h5{
+	font-weight: 500;
+    font-size: 42px ;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+
+.stockDetailsText h5::before{
+    
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+  background-color: #0052CC;
+	/* background-color: #e91e63; */
+	height: 5px;
+	box-sizing: border-box;
+	width: 220px;
+}
+
+.button-container {
+	text-align: right;
+  }
+  
+  .button-container button {
+	margin-left: 10px;
+  }

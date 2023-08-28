@@ -15,16 +15,10 @@ import lombok.ToString;
 public class MFDetailsResponseDTO {
 
 	private String mfName;
-	
-	
+	private Long mfId;
 	private double mfFundSize;
 	
-	
-	private double mfNAV;
-	
-	
 	private double mfTotalUnits;
-	
 	
 	private double mfTotalInvestment;
 }

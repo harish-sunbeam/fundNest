@@ -6,8 +6,10 @@ import java.time.LocalDateTime;
 
 import org.modelmapper.TypeToken;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -122,7 +124,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 	// In this Method
 	@Override
 	public String updateStockDetails(UpdateStockInMfRequestDTO request, Long mfId) {
-
+									System.out.println("list:-"+request.getStockDetails());
 		List<StockDetails> saveAllList = new ArrayList<StockDetails>();
 		double[] arrNoOfUnitsPerStock = new double[10];
 		double[] arrInvestmentInStock = new double[10];
@@ -206,6 +208,7 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		return "Successful";
 	}
 
+
 	@Override
 	public List<StockMutualFundRelationResponseDTO> getStockMfRelationDetailsByMfId(Long mfId) {
 		// TODO Auto-generated method stub
@@ -228,4 +231,26 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		}
 		return newList;
 	}
+  
+  @Override
+  public List<StockDetails> getStockDetailsExcludeIncluded() {
+		List<StockDetails> newStockList=new ArrayList<StockDetails>();
+		List<StockDetails> stockList=stockDetailsDao.findAll();
+		List<StockMutualFundRelation> stockMfRelation = stockMfRelationDao.findAll();
+		Set<Long> stockMfRelationIds = new HashSet<>();
+		for (StockMutualFundRelation relation : stockMfRelation) {
+		    stockMfRelationIds.add(relation.getStockDetails().getStockId());
+		}
+
+		// Compare stockIds and add to newStockList if not present in either list
+		for (StockDetails stock : stockList) {
+		    if (!stockMfRelationIds.contains(stock.getStockId())) {
+		        newStockList.add(stock);
+		    }
+		}
+		
+		
+		return newStockList;
+	}
+
 }
