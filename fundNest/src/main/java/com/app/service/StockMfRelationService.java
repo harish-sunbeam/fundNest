@@ -18,6 +18,9 @@ public interface StockMfRelationService {
 	
 
 	List<StockMutualFundRelationResponseDTO> getStockMfRelationDetailsByMfId(Long mfId);
+
+
+	List<StockMutualFundRelationResponseDTO> getStockMfRelationDetailsByMfId(Long mfId);
   List<StockDetails> getStockDetailsExcludeIncluded();
 
 }

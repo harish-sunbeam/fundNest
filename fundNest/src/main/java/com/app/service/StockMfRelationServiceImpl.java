@@ -208,8 +208,8 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		return "Successful";
 	}
 
-	
 
+	@Override
 	public List<StockMutualFundRelationResponseDTO> getStockMfRelationDetailsByMfId(Long mfId) {
 		// TODO Auto-generated method stub
 		MFDetails mfDetails=new MFDetails();
@@ -252,6 +252,5 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		
 		return newStockList;
 	}
-
 
 }

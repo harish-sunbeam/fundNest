@@ -124,4 +124,21 @@ public class CustTransacHistoryServiceImpl implements CustTransacHistoryService 
 		}
 
 	}
+	
+	
+	
+	@Override
+	public CustTransacHistoryResponseDTO getTransactionDetails(Long custId) {
+		// TODO Auto-generated method stub
+		List<CustomerTransacHistory> custTHList = custTransacHistoryDao
+				.findBySignUpDetailsCustIdOrderByCustTransacHistoryIdDesc(custId);
+		
+		CustomerTransacHistory customerTransacHistory = new CustomerTransacHistory();
+		double latestBalance = 0;
+
+		if (!custTHList.isEmpty()) {
+			customerTransacHistory = custTHList.get(0); // Previous opening balance
+		}
+		return mapper.map(customerTransacHistory, CustTransacHistoryResponseDTO.class);
+	}
 }

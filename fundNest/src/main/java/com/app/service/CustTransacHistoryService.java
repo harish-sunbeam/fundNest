@@ -14,5 +14,7 @@ public interface CustTransacHistoryService {
 	 List<CustTransacHistoryResponseDTO> getCustTHByCustId(Long custId);
 	 
 	 CustTransacHistoryResponseDTO withdraw(CustTransacHistoryRequestDTO  request,Long custId);
+	 
+	 CustTransacHistoryResponseDTO getTransactionDetails(Long custId);
 
 }

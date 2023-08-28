@@ -1,5 +1,8 @@
 package com.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import com.app.dao.CustomerKYCDetailsDao;
 import com.app.dao.CustomerNomineeDetailsDao;
 import com.app.dao.CustomerPersonalDetailsDao;
 import com.app.dao.UserDao;
+import com.app.dao.UserInvestmentDetailsDao;
 import com.app.dto.AddKYCDetailsRequestDTO;
 import com.app.dto.AddKYCDetailsResponseDTO;
 import com.app.dto.AddNomineeRequestDTO;
@@ -22,11 +26,14 @@ import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerUpdateProfileResponseDTO;
 import com.app.dto.LogInRequestDTO;
 import com.app.dto.LogInResponseDTO;
+import com.app.dto.UserInvestmentDetailsResponseDTO;
 import com.app.entities.CustomerKYCDetails;
 import com.app.entities.CustomerNomineeDetails;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.CustomerTransacHistory;
+import com.app.entities.MFDetails;
 import com.app.entities.SignUpDetails;
+import com.app.entities.UserInvestmentDetails;
 
 @Service
 @Transactional
@@ -46,6 +53,9 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustTransacHistoryDao custTransacHistoryDao;
+	
+	@Autowired
+	private UserInvestmentDetailsDao userInvestmentDetailsDao;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -69,6 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customerPersonalDetails.setCustPinCode(request.getCustPinCode());
 		customerPersonalDetails.setCustDOB(request.getCustDOB());
 		customerPersonalDetails.setSignUpDetails(signUpDetails);
+		customerPersonalDetails.setUrlOfImage(request.getUrlOfImage());
 		
 		
 		CustomerPersonalDetails  persistentCust=custPDetailsDao.save(mapper.map(customerPersonalDetails, CustomerPersonalDetails.class));
@@ -95,6 +106,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customerNomineeDetails.setNomRelation(request.getNomRelation());
 		customerNomineeDetails.setNomState(request.getNomState());
 		customerNomineeDetails.setSignUpDetails(signUpDetails);
+	
 		CustomerNomineeDetails persistentNom=custNomDetailsDao.save(mapper.map(customerNomineeDetails, CustomerNomineeDetails.class));
 		
 		return mapper.map(persistentNom, AddNomineeResponseDTO.class);
@@ -164,10 +176,24 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 	@Override
-	public CustTransacHistoryResponseDTO getTransactionDetails(SignUpDetails request) {
-		// TODO Auto-generated method stub
-		CustomerTransacHistory  customerTransacHistory = custTransacHistoryDao.findBySignUpDetails(mapper.map(request, SignUpDetails.class));
-		return mapper.map(customerTransacHistory, CustTransacHistoryResponseDTO.class);
-	
+	public List<UserInvestmentDetailsResponseDTO> getUserInvestmentDetailsByCustId(Long custId) {
+		List<UserInvestmentDetails> userInvestmentList = userInvestmentDetailsDao.findAllMfDetailsBySignUpDetailsCustId(custId);
+		List<UserInvestmentDetailsResponseDTO> newList = new ArrayList<UserInvestmentDetailsResponseDTO>();
+		for (UserInvestmentDetails relation : userInvestmentList) {
+			MFDetails mfDetails = new MFDetails();
+			SignUpDetails signUpDetails = new SignUpDetails(); 
+			UserInvestmentDetailsResponseDTO dto = new UserInvestmentDetailsResponseDTO();
+			dto.setInvestmentAmmount(relation.getInvestmentAmmount());
+			dto.setInvestmentDate(relation.getInvestmentDate());
+			dto.setPAndl(relation.getPAndl());
+			dto.setUnits(relation.getUnits());
+			signUpDetails.setCustId(relation.getSignUpDetails().getCustId());
+			mfDetails.setMfId(relation.getMfDetails().getMfId());
+			dto.setMfName(relation.getMfDetails().getMfName());
+			
+			newList.add(dto);
+		}
+		return newList;
 	}
+
 }
