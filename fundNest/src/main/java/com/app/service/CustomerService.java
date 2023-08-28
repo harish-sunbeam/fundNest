@@ -6,6 +6,7 @@ import com.app.dto.AddNomineeRequestDTO;
 import com.app.dto.AddNomineeResponseDTO;
 import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.AddProfileResponseDTO;
+import com.app.dto.CustTransacHistoryResponseDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
 import com.app.dto.CustomerUpdateProfileResponseDTO;
 import com.app.dto.LogInRequestDTO;
@@ -28,4 +29,6 @@ public interface CustomerService {
 	AddNomineeResponseDTO getCustomerNomineeDetails(SignUpDetails request);
 	
 	AddKYCDetailsResponseDTO getCustomerKycDetails(SignUpDetails request);
+	
+	CustTransacHistoryResponseDTO getTransactionDetails(SignUpDetails request);
 }
