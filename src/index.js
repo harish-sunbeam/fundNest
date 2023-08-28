@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom';
-import Landing from './Pages/Landing';
+// index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(<BrowserRouter>
-    <Landing/>
-</BrowserRouter>)
-
-
-
-
+import { Provider } from "react-redux";
+import Landing from "./Pages/Landing";
+import store from "./store";
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Landing />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
+);
