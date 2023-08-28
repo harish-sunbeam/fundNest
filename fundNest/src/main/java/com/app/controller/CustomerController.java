@@ -200,6 +200,16 @@ public class CustomerController {
 		
 	}
 	
+//	TO get User investment Details
+	@GetMapping("/userInvestmentDetails/{custId}")
+	public ResponseEntity<?> getCustomerInvestmentDetails(@PathVariable Long custId)
+	{   
+		System.out.println("In get Cust investment Details"+ custId);
+		SignUpDetails cust=userService.getCustFromId(custId);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(custService.getCustomerInvestmentDetails(cust));
+		
+	}
 	
 	
 }
