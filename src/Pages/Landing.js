@@ -21,13 +21,23 @@ import NomineeDetails from './NomineeDetails'
 import AllMutualFunds from './AllMutualFunds';
 import MutualFund1 from './MutualFund1';
 import StockComparison from "./StockComparison";
+import StockDetails from "./StockDetails"
+import MfCompanyDetails from './MfCompanyDetails'
+import MutualFundDetails from './MutualFundDetails'
+import StockSelection from './SelectStockInMf'
+import AddSelectedStock from './AddSelectedStock'
+import AdminDash from "./AdminDash";
+import ListAllMf from "./ListAllMf";
+import UserDash from "./UserDash";
+import MfManagerDash from "./MfManagerDash";
+import ChangeStockPrice from "./ChangeStockPrice";
 const Landing = () => {
   return (
     <div>
       <div>
         <Navbar />
       </div>
-
+     
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
@@ -49,8 +59,20 @@ const Landing = () => {
         <Route exact path='/mf1' component={MutualFund1}/>
          <Route exact path='/signup' component={SignUp}/>
          <Route exact path='/stockcmp' component={StockComparison}/>
+         <Route exact path='/stockdetails' component={StockDetails}/>
+         <Route exact path='/addmfcompanydetails' component={MfCompanyDetails}/>
+         <Route exact path='/addmfdetails' component={MutualFundDetails}/>
+         <Route exact path='/selectstocksinmf' component={StockSelection}/>
+         <Route exact path='/admindashboard' component={AdminDash}/>
+         <Route exact path='/addselectedstocksinmf' component={AddSelectedStock}/>
+         <Route exact path='/listallmf' component={ListAllMf}/>
+         <Route exact path='/changestockprice' component={ChangeStockPrice}/>
+         <Route exact path='/userdashboard' component={UserDash}/>
+         <Route exact path='/mfmanagerdashboard' component={MfManagerDash}/>
 
+            
       </Switch>
+      
       <div>
         <Footer />
       </div>
