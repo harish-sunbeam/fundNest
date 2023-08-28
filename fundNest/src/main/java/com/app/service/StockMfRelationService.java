@@ -16,5 +16,8 @@ public interface StockMfRelationService {
 	
 	String updateStockDetails(UpdateStockInMfRequestDTO request,Long mfId);
 	
+
 	List<StockMutualFundRelationResponseDTO> getStockMfRelationDetailsByMfId(Long mfId);
+  List<StockDetails> getStockDetailsExcludeIncluded();
+
 }

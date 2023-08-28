@@ -20,5 +20,5 @@ public class MFDetailsRequestDTO {
 	
 	private double mfFundSize;
 
-	private double mfTotalInvestment;
+	
 }
