@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 public class AddProfileRequestDTO {
 
-	
+	private int custId;
 
 	private String custFirstName;
 
@@ -37,4 +37,7 @@ public class AddProfileRequestDTO {
 	private String custPinCode;
 
 	private LocalDate custDOB;
+	
+	private String urlOfImage;
+	
 }

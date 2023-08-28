@@ -21,9 +21,11 @@ import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.CustTransacHistoryRequestDTO;
 import com.app.dto.CustTransacHistoryResponseDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
+import com.app.dto.StockMutualFundRelationResponseDTO;
 import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.CustomerOrderHistoryResponseDTO;
 import com.app.dto.UserInvestmentDetailsRequestDTO;
+import com.app.dto.UserInvestmentDetailsResponseDTO;
 import com.app.entities.CustomerPersonalDetails;
 import com.app.entities.CustomerTransacHistory;
 import com.app.entities.SignUpDetails;
@@ -57,10 +59,10 @@ public class CustomerController {
 	
 	// To add the customer Profile
 	@PostMapping("/addprofile/{custId}")
-	public ResponseEntity<?> addCustProfile(@RequestBody AddProfileRequestDTO request, Long custId) {
+	public ResponseEntity<?> addCustProfile(@RequestBody AddProfileRequestDTO request) {
 		{
 			System.out.println("Add profile of user " + request);
-			return ResponseEntity.status(HttpStatus.CREATED).body(custService.addCustProfile(request,custId));
+			return ResponseEntity.status(HttpStatus.CREATED).body(custService.addCustProfile(request, Long.valueOf(request.getCustId())));
 		}
 	}
 	
@@ -154,11 +156,7 @@ public class CustomerController {
 		@GetMapping("/transactiondetails/{custId}")
 		public ResponseEntity<?> getTransactionDetails(@PathVariable Long custId)
 		{
-			System.out.println("In get Transac Details"+ custId);
-			SignUpDetails cust=userService.getCustFromId(custId);
-			
-			return ResponseEntity.status(HttpStatus.CREATED).body(custService.getTransactionDetails(cust));
-			
+	        return  ResponseEntity.status(HttpStatus.CREATED).body(custTransacHistoryService.getTransactionDetails(custId));
 		}
 
 	// Get the Overall Transaction History
@@ -200,4 +198,16 @@ public class CustomerController {
 		
 	}
 	
+
+	
+	// To retrieve the Customer Investment details
+	@GetMapping("/getCustomerInvestmentDetails/{custId}")
+	public ResponseEntity<List<UserInvestmentDetailsResponseDTO>> getUserInvestmentDetailsByCustId(@PathVariable Long custId) {
+		List<UserInvestmentDetailsResponseDTO> children = custService.getUserInvestmentDetailsByCustId(custId);
+        return new ResponseEntity<>(children, HttpStatus.OK);
+	}
+	
+	
+	
+
 }
