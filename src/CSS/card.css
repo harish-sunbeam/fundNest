@@ -1,0 +1,13 @@
+.card-hover:hover {
+    transform: scale(1.05); /* Increase the size of the card slightly on hover */
+    transition: transform 0.3s ease; /* Add smooth transition effect */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+  }
+
+.arrang{
+  
+  width: 100%;
+  
+}
+
