@@ -28,6 +28,7 @@ import com.app.dao.StockMfRelationDao;
 import com.app.dao.UserInvestmentDetailsDao;
 import com.app.dto.AddStockInMfRequestDTO;
 import com.app.dto.AddStockInMfResponseDTO;
+import com.app.dto.StockMutualFundRelationResponseDTO;
 import com.app.dto.UpdateStockInMfRequestDTO;
 import com.app.dto.UpdateStockInMfResponseDTO;
 import com.app.entities.ChangeInNav;
@@ -207,8 +208,32 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		return "Successful";
 	}
 
-	@Override
-	public List<StockDetails> getStockDetailsExcludeIncluded() {
+	
+
+	public List<StockMutualFundRelationResponseDTO> getStockMfRelationDetailsByMfId(Long mfId) {
+		// TODO Auto-generated method stub
+		MFDetails mfDetails=new MFDetails();
+//		StockDetails stockDetails = new StockDetails();
+		List<StockDetails> stocklist = getStockDetailsByMfId(mfId); // getStockDetailsByMfId() method is already defined above
+		List<StockMutualFundRelation> list = stockMfRelationDao.findByMfDetailsMfId(mfId);
+		List<StockMutualFundRelationResponseDTO> newList = new ArrayList<StockMutualFundRelationResponseDTO>();
+		for (StockMutualFundRelation relation : list) {
+			StockDetails stockDetails = new StockDetails();
+			StockMutualFundRelationResponseDTO dto = new StockMutualFundRelationResponseDTO();
+			mfDetails.setMfId(mfId);
+			dto.setMfInvestmentPerStock(relation.getMfInvestmentPerStock());
+			dto.setNoOfUnitsPerStock(relation.getNoOfUnitsPerStock());
+			stockDetails.setStockId(relation.getStockDetails().getStockId());
+			stockDetails.setStockName(relation.getStockDetails().getStockName());
+			stockDetails.setStockSector(relation.getStockDetails().getStockSector());
+//			dto.setStockDetails(stockDetails);
+			newList.add(dto);
+		}
+		return newList;
+	}
+  
+  @Override
+  public List<StockDetails> getStockDetailsExcludeIncluded() {
 		List<StockDetails> newStockList=new ArrayList<StockDetails>();
 		List<StockDetails> stockList=stockDetailsDao.findAll();
 		List<StockMutualFundRelation> stockMfRelation = stockMfRelationDao.findAll();
@@ -227,6 +252,6 @@ public class StockMfRelationServiceImpl implements StockMfRelationService {
 		
 		return newStockList;
 	}
-	
+
 
 }

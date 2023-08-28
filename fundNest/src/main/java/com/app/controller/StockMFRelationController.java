@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.UpdateStockInMfRequestDTO;
 
+import com.app.entities.StockMutualFundRelation;
+import com.app.dto.CustTransacHistoryResponseDTO;
+import com.app.dto.StockDetailsRequestDTO;
+import com.app.dto.StockMutualFundRelationResponseDTO;
+import com.app.service.StockMfRelationService;
+
+
 import com.app.service.StockMfRelationService;
 @RestController
 @RequestMapping("/stockmfrelation")
@@ -30,6 +37,14 @@ public class StockMFRelationController {
 			System.out.println("Update Stock details ");
 			return ResponseEntity.status(HttpStatus.CREATED).body(stockMfRelationService.updateStockDetails(request,mfId));
 		}
+		
+	
+	}
+	
+	@GetMapping("/getStockMfRelationDetails/{mfId}")
+	public ResponseEntity<List<StockMutualFundRelationResponseDTO>> getStockMfRelationDetailsByMfId(@PathVariable Long mfId) {
+		List<StockMutualFundRelationResponseDTO> children = stockMfRelationService.getStockMfRelationDetailsByMfId(mfId);
+        return new ResponseEntity<>(children, HttpStatus.OK);
 	}
 	@GetMapping("/getstockdetailsexcluded")
 	public ResponseEntity<?> getStockDetailsExcludeIncluded() {
