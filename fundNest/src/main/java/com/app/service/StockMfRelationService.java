@@ -14,4 +14,7 @@ public interface StockMfRelationService {
 	AddStockInMfResponseDTO addStocksInMf(AddStockInMfRequestDTO request);
 	
 	String updateStockDetails(UpdateStockInMfRequestDTO request,Long mfId);
+	
+	List<StockDetails> getStockDetailsExcludeIncluded();
+
 }
