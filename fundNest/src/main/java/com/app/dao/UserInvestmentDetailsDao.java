@@ -12,5 +12,7 @@ public interface UserInvestmentDetailsDao extends JpaRepository<UserInvestmentDe
 	UserInvestmentDetails  findByMfDetailsAndSignUpDetails(MFDetails mfDetails,SignUpDetails signUpDetails);
 	
 	List<UserInvestmentDetails>	findAllByMfDetailsMfId(Long mfId);
+	
+	List<UserInvestmentDetails> findAllMfDetailsBySignUpDetailsCustId(Long custId);
 
 }
