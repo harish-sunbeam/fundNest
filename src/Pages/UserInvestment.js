@@ -203,14 +203,16 @@ function UserInvestment() {
               <tbody>
                 {userInvestmentDetails.map((s,id) => {
                 //  const isDisabled = disabledStocks.includes(s.stockId);
-                 counter++;
+                const invDate = new Date(s.investmentDate);
+      const transactionDate = invDate.toLocaleDateString(); // Format Date 
+                counter++;
                   return (
                     <tr key={s.investmentDate}>
                       {console.log("id",id)}
                       <td>{counter}</td>
                       <td>{s.mfName}</td>
                       <td>{s.investmentAmmount}</td>
-                      <td>{s.investmentDate}</td>
+                      <td>{transactionDate}</td>
                       <td>{s.units}</td>
                       <td>
                         <button
