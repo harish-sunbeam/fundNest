@@ -21,7 +21,7 @@ import com.app.dto.AddProfileRequestDTO;
 import com.app.dto.CustTransacHistoryRequestDTO;
 import com.app.dto.CustTransacHistoryResponseDTO;
 import com.app.dto.CustomerUpdateProfileRequestDTO;
-import com.app.dto.StockMutualFundRelationResponseDTO;
+
 import com.app.dto.CustomerOrderHistoryRequestDTO;
 import com.app.dto.CustomerOrderHistoryResponseDTO;
 import com.app.dto.UserInvestmentDetailsRequestDTO;

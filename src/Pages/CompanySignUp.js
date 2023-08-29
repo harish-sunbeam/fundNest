@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-function SignUp() {
+function CompanySignUp() {
   const history = useHistory();
 
   const [signup, setSignup] = useState({
@@ -66,10 +66,10 @@ function SignUp() {
         emailId: signup.emailId,
         password: signup.password,
         mobileNo: signup.mobileno,
-      };
+      };    
 
       axios
-        .post('http://localhost:8080/user/registerasuser', mySignup)
+        .post('http://localhost:8080/user/registerascompany', mySignup)
         .then((response) => {
           console.log(response.data);
           window.localStorage.setItem('mobileNo', response.data.mobileNo);
@@ -90,12 +90,8 @@ function SignUp() {
       <div className="row justify-content-center mt-5">
         <div className="col-md-6">
           <div className="card">
-            
-             
-              <p>Click here for MF Company SignUp: 👉 <a href="/companysignup">Next Page</a></p>
-            
             <div className="card-header">
-              <h3>Sign Up</h3>
+              <h3>Sign Up For MutualFund Company</h3>
             </div>
             <div className="card-body">
               <form>
@@ -159,4 +155,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default CompanySignUp;

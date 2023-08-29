@@ -54,10 +54,5 @@ public class StockMFRelationController {
 		}
 	}
 
-	@GetMapping("/getStockMfRelationDetails/{mfId}")
-	public ResponseEntity<List<StockMutualFundRelationResponseDTO>> getStockMfRelationDetailsByMfId(@PathVariable Long mfId) {
-		List<StockMutualFundRelationResponseDTO> children = stockMfRelationService.getStockMfRelationDetailsByMfId(mfId);
-        return new ResponseEntity<>(children, HttpStatus.OK);
-	}
-
+	
 }

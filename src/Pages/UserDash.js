@@ -17,7 +17,7 @@ function UserDash() {
                   <div className="card-header py-3">
                     <Link
                       style={{ textDecoration: "none" }}
-                      to="/stockdetails"
+                      to="/profilehome"
                     >
                       {" "}
                       <h6 className="m-0 font-weight-bold text-primary">
@@ -36,7 +36,7 @@ function UserDash() {
               <div className="col-xl-4 col-lg-5 ">
                 <div className="card shadow mb-4 card-hover ">
                   <div className="card-header py-3">
-                    <Link style={{ textDecoration: "none" }} to="/listallmf">
+                    <Link style={{ textDecoration: "none" }} to="/allmutualfunds">
                       {" "}
                       <h6 className="m-0 font-weight-bold text-primary">
                         Mutual Funds
@@ -54,7 +54,7 @@ function UserDash() {
               <div className="col-xl-4 col-lg-5 ">
                 <div className="card shadow mb-4 card-hover ">
                   <div className="card-header py-3">
-                    <Link style={{ textDecoration: "none" }} to="/listallmf">
+                    <Link style={{ textDecoration: "none" }} to="/userinvestmentdetails">
                       {" "}
                       <h6 className="m-0 font-weight-bold text-primary">
                        Portfolio
@@ -72,7 +72,7 @@ function UserDash() {
               <div className="col-xl-4 col-lg-5 ">
                 <div className="card shadow mb-4 card-hover ">
                   <div className="card-header py-3">
-                    <Link style={{ textDecoration: "none" }} to="/listallmf">
+                    <Link style={{ textDecoration: "none" }} to="/withdrawtransaction">
                       {" "}
                       <h6 className="m-0 font-weight-bold text-primary">
                       Wallet
@@ -90,7 +90,7 @@ function UserDash() {
               <div className="col-xl-4 col-lg-5 ">
                 <div className="card shadow mb-4 card-hover ">
                   <div className="card-header py-3">
-                    <Link style={{ textDecoration: "none" }} to="/listallmf">
+                    <Link style={{ textDecoration: "none" }} to="/orderhistory">
                       {" "}
                       <h6 className="m-0 font-weight-bold text-primary">
                       Order History
@@ -108,7 +108,7 @@ function UserDash() {
               <div className="col-xl-4 col-lg-5 ">
                 <div className="card shadow mb-4 card-hover ">
                   <div className="card-header py-3">
-                    <Link style={{ textDecoration: "none" }} to="/listallmf">
+                    <Link style={{ textDecoration: "none" }} to="/transactionhistory">
                       {" "}
                       <h6 className="m-0 font-weight-bold text-primary">
                        Transaction History
